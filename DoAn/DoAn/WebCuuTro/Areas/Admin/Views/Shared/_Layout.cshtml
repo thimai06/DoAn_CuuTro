@@ -1,0 +1,198 @@
+﻿@using WebCuuTro.Areas.Admin.Models;
+@using Models;
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="ThemeBucket">
+    <link rel="shortcut icon" href="~/Assets/Admin/images/favicon.png">
+    <title>@ViewBag.Title - Quản trị </title>
+    <!--Core CSS -->
+
+    <link href="~/Assets/Admin/bs3/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Assets/Admin/js/jquery-ui/jquery-ui-1.10.1.custom.min.css" rel="stylesheet">
+    <link href="~/Assets/Admin/css/bootstrap-reset.css" rel="stylesheet">
+    <link href="~/Assets/Admin/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="~/Assets/Admin/js/jvector-map/jquery-jvectormap-1.2.2.css" rel="stylesheet">
+    <link href="~/Assets/Admin/css/clndr.css" rel="stylesheet">
+    <!--clock css-->
+    <link href="~/Assets/Admin/js/css3clock/css/style.css" rel="stylesheet">
+    <!--Morris Chart CSS -->
+    <link rel="stylesheet" href="~/Assets/Admin/js/morris-chart/morris.css">
+    <!-- Custom styles for this template -->
+    <link href="~/Assets/Admin/css/style.css" rel="stylesheet">
+    <link href="~/Assets/Admin/css/style-responsive.css" rel="stylesheet" />
+
+
+</head>
+<body>
+    <section id="container">
+        <!--header start-->
+            @RenderPage("_Header.cshtml");
+        <!--Hết header->
+        <!--Bắt đầu sidebar-->
+        <aside>
+            <div id="sidebar" class="nav-collapse">
+                <b>
+                    <div class="leftside-navigation">
+                        <ul class="sidebar-menu" id="nav-accordion">
+                            <li class="sub-menu">
+                                <a href="javascript:;">
+                                    <i class="fa fa-laptop"></i>
+                                    <span>Quản lý tài khoản</span>
+                                </a>
+                                <ul class="sub">
+                                    <li>@Html.ActionLink("Thêm tài khoản", "Create", "Personal")</li>
+                                    <li>@Html.ActionLink("Danh sách", "Index", "Personal")</li>
+                                </ul>
+                            </li>
+                            <li class="sub-menu">
+                                <a href="javascript:;">
+                                    <i class="fa fa-magic"></i>
+                                    <span>Quản lý Đợt cứu trợ</span>
+                                </a>
+                                <ul class="sub">
+                                    <li>@Html.ActionLink("Thêm Đợt cứu trợ", "Create", "Relief")</li>
+                                    @*<li>@Html.ActionLink("Quản Lý Loại", "Index", "LoaiSP")</li>*@
+                                    <li>@Html.ActionLink("Danh Sách các đợt cứu trợ", "Index", "Relief")</li>
+                                </ul>
+                            </li>
+                            <li class="sub-menu">
+                                <a href="javascript:;">
+                                    <i class="fa fa-magic"></i>
+                                    <span>Quản lý Đăng ký ủng hộ</span>
+                                </a>
+                                <ul class="sub">
+                                    <li>@Html.ActionLink("Thêm Đăng ký", "Create", "Registration_form")</li>
+                                    @*<li>@Html.ActionLink("Quản Lý Loại", "Index", "LoaiSP")</li>*@
+                                    <li>@Html.ActionLink("Danh Sách Đăng ký ủng hộ", "Index", "Registration_form")</li>
+                                </ul>
+                            </li>
+
+                            <li class="sub-menu">
+                                <a href="javascript:;">
+                                    <i class="fa fa-magic"></i>
+                                    <span>Quản lý Phiếu nhập</span>
+                                </a>
+                                <ul class="sub">
+                                    <li>@Html.ActionLink("Thêm Phiếu nhập", "Create", "Receipt")</li>
+                                    @*<li>@Html.ActionLink("Quản Lý Loại", "Index", "LoaiSP")</li>*@
+                                    <li>@Html.ActionLink("Danh Sách Phiếu nhập", "Index", "Receipt")</li>
+                                </ul>
+                            </li>
+
+                            <li class="sub-menu">
+                                <a href="javascript:;">
+                                    <i class="fa fa-magic"></i>
+                                    <span>Quản lý loại cứu trợ</span>
+                                </a>
+                                <ul class="sub">
+                                    <li>@Html.ActionLink("Thêm loại cứu trợ", "Create", "LoaiSP")</li>
+                                    @*<li>@Html.ActionLink("Quản Lý Loại", "Index", "LoaiSP")</li>*@
+                                    <li>@Html.ActionLink("Danh Sách các loại cứu trợ", "Index", "LoaiSP")</li>
+                                </ul>
+                            </li>
+
+                            <li class="sub-menu">
+                                <a href="javascript:;">
+                                    <i class="fa fa-magic"></i>
+                                    <span>Quản lý hàng</span>
+                                </a>
+                                <ul class="sub">
+                                    <li>@Html.ActionLink("Thêm hàng cứu trợ", "Create", "LoaiSP")</li>
+                                    @*<li>@Html.ActionLink("Quản Lý Loại", "Index", "LoaiSP")</li>*@
+                                    <li>@Html.ActionLink("Danh Sách các hàng cứu trợ", "Index", "LoaiSP")</li>
+                                </ul>
+                            </li>
+
+                            <li class="sub-menu">
+                                <a href="javascript:;">
+                                    <i class="fa fa-bar-chart-o"></i>
+                                    <span>Thống Kê</span>
+                                </a>
+                                <ul class="sub">
+                                    <li>@Html.ActionLink("Theo số lượng thực tế/ đăng ký", "Index", "SanPhamBanChay")</li>
+
+                                </ul>
+                            </li>
+
+                            <li>
+                                <a href="login.html">
+                                    <i class="fa fa-user"></i>
+                                    <span>Login</span>
+                                </a>
+                            </li>
+                        </ul>
+                </b>
+            </div>
+            <a href="~/Areas/Admin/Views/Shared/_Layout.cshtml">~/Areas/Admin/Views/Shared/_Layout.cshtml</a>
+            <!-- sidebar menu end-->
+            
+
+        </aside>
+        <!--sidebar end-->
+        <!--main content start-->
+        <section id="main-content">
+            <section class="wrapper">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <section class="panel"
+                            <header class="panel-heading">
+                                <b>@RenderSection("header", required: true)</b>
+                            </header>
+
+                             @*if (tempdata["alertmessage"] != null)
+                                {
+                                <div id="alerbox" class="alert @tempdata["alerttype"] ">   @tempdata["alertmessage"]</div>
+                            }*@
+                            <div class="panel-body">
+                                @RenderBody()
+                            </div>
+
+                <!--mini statistics start-->
+                        </section>
+                    </div>
+                </div>
+            </section>
+        </section>
+    </section>
+    <!-- Placed js at the end of the document so the pages load faster -->
+    <!--Core js-->
+    <script src="~/Assets/Admin/js/jquery.js"></script>
+    <script src="~/Assets/Admin/js/jquery-ui/jquery-ui-1.10.1.custom.min.js"></script>
+    <script src="~/Assets/Admin/bs3/js/bootstrap.min.js"></script>
+    <script src="~/Assets/Admin/js/jquery.dcjqaccordion.2.7.js"></script>
+    <script src="~/Assets/Admin/js/jquery.scrollTo.min.js"></script>
+    <script src="~/Assets/Admin/js/jQuery-slimScroll-1.3.0/jquery.slimscroll.js"></script>
+    <script src="~/Assets/Admin/js/jquery.nicescroll.js"></script>
+    <script language="javascript" type="text/javascript" src="js/flot-chart/excanvas.min.js"></script>
+    <script src="~/Assets/Admin/js/skycons/skycons.js"></script>
+    <script src="~/Assets/Admin/js/jquery.scrollTo/jquery.scrollTo.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+    <script src="~/Assets/Admin/js/calendar/clndr.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
+    <script src="~/Assets/Admin/js/calendar/moment-2.2.1.js"></script>
+    <script src="~/Assets/Admin/js/evnt.calendar.init.js"></script>
+    <script src="~/Assets/Admin/js/jvector-map/jquery-jvectormap-1.2.2.min.js"></script>
+    <script src="~/Assets/Admin/js/jvector-map/jquery-jvectormap-us-lcc-en.js"></script>
+    <script src="~/Assets/Admin/js/gauge/gauge.js"></script>
+    <!--common script init for all pages-->
+    <script src="~/Assets/Admin/js/scripts.js"></script>
+    <!--script for this page-->
+
+    <script>
+        $(function () {
+            $('#AlertBox').removeClass("hide");
+            $('#AlertBox').delay("5000").slideUp("500");
+        });
+    </script>
+</body>
+</html>

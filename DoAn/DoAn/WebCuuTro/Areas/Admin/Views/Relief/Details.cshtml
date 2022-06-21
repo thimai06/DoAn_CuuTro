@@ -1,0 +1,67 @@
+﻿@model Models.EF.Relief
+
+@{
+    ViewBag.Title = "Details Relief";
+    Layout = "~/Areas/Client/Views/Shared/_Layout.cshtml";
+}
+
+@section header{
+    <b><i class="fa fa-list-alt text-danger">&nbsp;</i><span class="text-danger">  Chi Tiết </span></b>
+}
+
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    CHI TIẾT    <b class="text-danger">@Model.ID_relieft</b>
+                </div>
+                <div style="padding:20px 7px 50px 20px; ">
+                    <div class="table-responsive">
+                        <table class="table  table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th class="text-center text-primary yellow-bg-prd">ID</th>
+                                    <th class="text-center text-primary yellow-bg-prd">Loại cứu trợ</th>
+                                    <th class="text-center text-primary yellow-bg-prd">Phường</th>
+                                    <th class="text-center text-primary yellow-bg-prd">Thời gian</th>
+                                    <th class="text-center text-primary yellow-bg-prd">Nội dung</th>
+                                    <th class="text-center text-primary yellow-bg-prd">Tiêu đề</th>
+                                    <th class="text-center text-primary yellow-bg-prd">Mô tả</th>
+                                    <th class="text-center text-primary yellow-bg-prd">Thời gian BD</th>
+                                    <th class="text-center text-primary yellow-bg-prd">Thời gian KT</th>
+                                    <th class="text-center text-primary yellow-bg-prd">Trạng thái</th>
+                                    <th class="text-center text-primary yellow-bg-prd">Note</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                <tr id="row_@Model.ID_relieft">
+                                    <td>@Model.ID_relieft</td>
+                                    <td align="center">@Model.Relief_classification.Description</td>
+                                    <td>@Model.Ward.Name_ward</td>
+                                    <td align="center">@Model.Time_sent_post</td>
+                                    <td align="center">@Model.Content</td>
+                                    <td align="center">@Model.Title</td>
+                                    <td>@Html.Raw(Model.Description)</td>
+                                    <td align="center">@Model.Start_date</td>
+                                    <td>@Model.End_date</td>
+                                    <td align="center">@Model.status</td>
+                                    <td align="center">@Model.note</td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <a href="@Url.Action("Index")" class="btn btn-danger">Back to List</a>
+                                <a href="/Admin/SanPham/Edit/@Model.ID_relieft" class="btn btn-primary">Update</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+  

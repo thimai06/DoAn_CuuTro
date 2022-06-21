@@ -1,0 +1,74 @@
+﻿@model IEnumerable<Models.EF.Registration_form>
+
+@using PagedList;
+@using PagedList.Mvc
+@{
+    ViewBag.Title = "Quản lý đăng ký";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section header{
+    <div style="display:flex;">
+        <i class="fa fa-user" style="font-size:30px; margin-top:20px;margin-left:10px"> </i>
+        <h3>&nbsp;Quản lý đăng ký ủng hộ</h3>
+    </div>
+}
+@using (Html.BeginForm("Index", "registration_form", FormMethod.Post))
+{
+    <div class="col-lg-12 form-group" style="margin-top:20px">
+        <div class="col-md-6">
+            <p>
+                @Html.ActionLink("Tạo Mới", "Create", "registration_form", new { @class = "btn btn-danger" })
+            </p>
+        </div>
+
+        <div class="col-md-3">
+            <input type="text" value="@ViewBag.SearchString" name="searchString" placeholder="Nhập từ khóa cần tìm kiếm" class="form-control" />
+        </div>
+        <div class="col-md-2">
+            <input type="submit" value="Tìm Kiếm" class="btn btn-info" />
+        </div>
+    </div>
+}
+
+<div class="table-responsive">
+    <div>
+        <table class="table  table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th class="text-center text-primary yellow-bg-prd">STT</th>
+                    <th class="text-center text-primary yellow-bg-prd">Đợt cứu trợ</th>
+                    <th class="text-center text-primary yellow-bg-prd">Người đăng ký</th>
+                
+
+                    <th class="text-center text-primary yellow-bg-prd">Thao Tác</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{ int i = 1;}
+                @foreach (var item in Model)
+                {
+                <tr id="row_@item.ID_re">
+                    <td class="tab-bg-dark-navy-blue" align="center">@i</td>
+                    <td align="center">@item.Relief.Title</td>
+                    <td>@item.Pesonal.Personal_name</td>
+                    
+
+                    <td align="center">
+                        <a href="~/Admin/SanPham/Details/@item.ID_re"><i class="fa fa-question-circle text-warning" style="font-size:20px;"></i></a>
+                        <a href="~/Admin/SanPham/Edit/@item.ID_re"><i class="fa fa-edit text-primary" style="font-size:20px;"></i></a>
+                        <a href="~/Admin/SanPham/Delete/@item.ID_re"><i class="fa fa-trash-o text-danger " style="font-size:20px;" onclick="return confirm('Bạn có chắc chắn muốn xóa đăng ký của @item.ID_user không ?');"></i></a>
+                    </td>
+                </tr>
+                    i = i + 1;
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<div>
+    @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page, @searchString = @ViewBag.SearchString }))
+</div>
+
+
+

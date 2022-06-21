@@ -1,0 +1,54 @@
+﻿@using WebCuuTro.Areas.Admin.Models;
+@using Models;
+<header class="header fixed-top clearfix" style="background-color:cornflowerblue">
+    <!--logo start-->
+    <div class="brand" style="background-color:cornflowerblue">
+        <a href="/Admin/Home" class="logo">
+            <h4 style="color:honeydew"><b>Cứu Trợ Xã Hội</b></h4>
+        </a>
+        <div class="sidebar-toggle-box">
+            <div class="fa fa-bars"></div>
+        </div>
+    </div>
+    <div class="top-nav clearfix" style="background-color:cornflowerblue">
+        <!--search & user info start-->
+
+        <ul class="nav pull-right top-menu">
+            <li>
+                <input type="text" class="form-control search" placeholder=" Search">
+            </li>
+            <!-- user login dropdown start-->
+            <li class="dropdown">
+                <a data-toggle="dropdown" class="dropdown-toggle" href="#" style="height:35px;">
+                    <img alt="" src="~/Assets/Admin/images/mai.JPG">
+                    <span class="username">
+                        @{
+                            var session = (LoginModel)Session[Constants.USER_SESSION];
+                            var result = "No name";
+
+                            if (session != null)
+                            {
+                                @session.Personal_name;
+                            }
+                            else
+                            { 
+                                @result;
+                            }
+                        }
+                    </span>
+                    <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu extended logout">
+                    <li><a href="#"><i class=" fa fa-suitcase"></i>Profile</a></li>
+                    <li><a href="#"><i class="fa fa-cog"></i> Settings</a></li>
+                    <li><a href="@Url.Action("Logout","Home")"><i class="fa fa-key"></i> Log Out</a></li>
+                </ul>
+            </li>
+            <li>
+                <div class="toggle-right-box">
+                    <div class="fa fa-bars"></div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</header>

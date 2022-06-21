@@ -1,0 +1,38 @@
+﻿/*login/register*/
+.wrapper {
+    height: 670px;
+    align-items: center;
+    padding: 0px 80px 10px 95px;
+    overflow: hidden
+}
+.btn-create{
+    cursor:pointer
+}
+.user-authen {
+    position: relative;
+    flex: 1;
+    height: 50%;
+}
+
+.login-form {
+    position: absolute;
+    transition: all 0.25s linear;
+    right:0;
+}
+    .login-form.close {
+        transform: translateX(150%)
+    }
+    .login-form.open {
+        transform: translateX(0)
+    }
+
+.register-form {
+    position: absolute;
+    transition: all 0.25s linear;
+    right:0;
+    transform:translateX(150%)
+   
+}
+.register-form.open{
+    transform:translateX(0)
+}

@@ -1,0 +1,83 @@
+﻿@model IEnumerable<Models.EF.Pesonal>
+
+@using PagedList;
+@using PagedList.Mvc
+@{
+    ViewBag.Title = "Quản lý người dùng";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+@section header{
+    <div style="display:flex;">
+        <i class="fa fa-user" style="font-size:30px; margin-top:20px;margin-left:10px"> </i>
+        <h3>&nbsp;Quản lý người dùng</h3>
+    </div>
+}
+
+@using (Html.BeginForm("Index", "Personal", FormMethod.Post))
+{
+    <div class="col-lg-12 form-group" style="margin-top:20px">
+        <div class="col-md-6">
+            <p>
+                @Html.ActionLink("Tạo Mới", "Create", "Personal", new { @class = "btn btn-danger" })
+            </p>
+        </div>
+
+        <div class="col-md-3">
+            <input type="text" value="@ViewBag.SearchString" name="searchString" placeholder="Nhập từ khóa cần tìm kiếm" class="form-control" />
+        </div>
+        <div class="col-md-2">
+            <input type="submit" value="Tìm Kiếm" class="btn btn-info" />
+        </div>
+    </div>
+}
+
+---
+<div class="table-responsive">
+    <div>
+        <table class="table  table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th class="text-center text-primary yellow-bg-prd">STT</th>
+                    <th class="text-center text-primary yellow-bg-prd">Tên đăng nhập</th>
+                    <th class="text-center text-primary yellow-bg-prd">Tên ND</th>
+                    <th class="text-center text-primary yellow-bg-prd">Mật khẩu</th>
+                    <th class="text-center text-primary yellow-bg-prd">CMND</th>
+                    <th class="text-center text-primary yellow-bg-prd">Địa chỉ</th>
+                    <th class="text-center text-primary yellow-bg-prd">Giới tính</th>
+                    <th class="text-center text-primary yellow-bg-prd">SĐT</th>
+                    <th class="text-center text-primary yellow-bg-prd">Thao Tác</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{ int i = 1;}
+                @foreach (var item in Model)
+                {
+                <tr id="row_@item.ID_user">
+                    <td class="tab-bg-dark-navy-blue" align="center">@i</td>
+                    <td align="center">@item.ID_user</td>
+                    <td>@item.Personal_name</td>
+                    <td align="center">@item.password </td>
+                    <td align="center">@item.ID_card </td>
+                    <td align="center">@item.Address </td>
+                    <td align="center">@item.Gender </td>
+                    <td align="center">@item.Phone </td>
+                    <td align="center">
+                        
+                        <a href="~/Admin/Personal/Details/@item.ID_user"><i class="fa fa-question-circle text-warning" style="font-size:20px;"></i></a>
+                        <a href="~/Admin/Personal/Edit/@item.ID_user"><i class="fa fa-edit text-primary" style="font-size:20px;"></i></a>
+                        <a href="~/Admin/Personal/Delete/@item.ID_user"><i class="fa fa-trash-o text-danger " style="font-size:20px;" onclick="return confirm('Bạn có chắc chắn muốn xóa @item.Personal_name không ?');"></i></a>
+                    </td>
+                </tr>
+                    i = i + 1;
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+--
+<div>
+    @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page, @searchString = @ViewBag.SearchString }))
+</div>
+@*<a href="~/Areas/Admin/Views/Personal/Index.cshtml"></a>*@
