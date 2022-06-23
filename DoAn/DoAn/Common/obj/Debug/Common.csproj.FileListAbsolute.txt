@@ -1,6 +1,0 @@
-E:\Freelancer\DoAn\DoAn_CuuTro\DoAn\DoAn\Common\bin\Debug\Common.dll
-E:\Freelancer\DoAn\DoAn_CuuTro\DoAn\DoAn\Common\bin\Debug\Common.pdb
-E:\Freelancer\DoAn\DoAn_CuuTro\DoAn\DoAn\Common\obj\Debug\Common.csproj.AssemblyReference.cache
-E:\Freelancer\DoAn\DoAn_CuuTro\DoAn\DoAn\Common\obj\Debug\Common.csproj.CoreCompileInputs.cache
-E:\Freelancer\DoAn\DoAn_CuuTro\DoAn\DoAn\Common\obj\Debug\Common.dll
-E:\Freelancer\DoAn\DoAn_CuuTro\DoAn\DoAn\Common\obj\Debug\Common.pdb
