@@ -1,42 +1,82 @@
-﻿<!DOCTYPE html>
-<html>
+﻿
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-    <meta charset="utf-8" />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+
+
+    <link rel="stylesheet" href="~/Assets/Client/library/slick/slick.css">
+
+    <link rel="stylesheet" href="~/Assets/Client/library/slick/slick-theme.css">
+
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+    <link rel="stylesheet" href="~/Assets/Client/css/style.css">
+    <link rel="stylesheet" href="~/Assets/Client/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Assets/Client/css/stylev2.css">
+    <link rel="stylesheet" href="~/Assets/Client/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/Assets/Client/css/responsive.css">
+    <title>@ViewBag.Title</title>
 </head>
+
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <header class=" header">
         <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            <div class="header-main">
+                <div class="header-logo">
+                    <img src="~/Assets/Client/image/lgo.png" alt="">
+                </div>
+                <nav>
+                    <ul class="header-menu">
+                        <li class="header-menu-item"><a href="#" class="header-menu-link">Trang chủ</a></li>
+                        <li class="header-menu-item"><a href="#" class="header-menu-link">Công khai</a></li>
+                        <li class="header-menu-item"><a href="#" class="header-menu-link">Đề xuất cứu trợ</a></li>
+                        <li class="header-menu-item"><a href="#" class="header-menu-link">Bản đồ cứu trợ</a></li>
+                        <li class="header-menu-item"><a href="#" class="header-menu-link">Phản ánh cứu trợ</a></li>
+                        <li class="header-menu-item"><a href="#" class="header-menu-link">Liên hệ</a></li>
+                        <li class="header-menu-item"><a href="#" class="header-menu-link">Đăng nhập</a></li>
+                    </ul>
+                </nav>
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
+        </div>
+    </header>
+
+    @RenderBody()
+
+
+    <div class="footer">
+        <div class="container">
+            <div class="footer-main">
+                <div class="footer-main-content">
+                    <div class="footer-main-item">
+                        <img class="footer-img" src="~/Assets/Client/image/lgo.png" alt="">
+                        <p class="footer-item-title1">Cứu hộ xã hội</p>
+                    </div>
+                    <div class="footer-main-item">
+                        <p class="footer-item-title">menu</p>
+                        <p class="footer-item-desc"> Công khai ủng hộ</p>
+                        <p class="footer-item-desc"> Đề xuất thiên tai</p>
+                        <p class="footer-item-desc"> Bản đồ cần cứu trợ</p>
+                    </div>
+                    <div class="footer-main-item">
+                        <p class="footer-item-title">contact</p>
+                        <p class="footer-item-desc"> Email: cuutroxahoi.org.vn.com</p>
+                        <p class="footer-item-desc"> Phone: 0795599636</p>
+                        <p class="footer-item-desc"> Web: abcxyz.vn.com</p>
+                    </div>
+                </div>
+                <p class="footer-bottom">Design by Thị Mai</p>
+
             </div>
         </div>
     </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+    <script src="~/Assets/Client/js/jquery.min.js"></script>
+    <script src="~/Assets/Client/library/slick/slick.js"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script src="~/Assets/Client/js/main.js"></script>
 </body>
 </html>
