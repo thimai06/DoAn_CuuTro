@@ -18,5 +18,29 @@ namespace WebCuuTro.Controllers
             await _districtService.CrawlDistrict();
             return View();
         }
+
+        public ActionResult ViewAll()
+        {
+            return View();
+        }
+
+        public ActionResult DetailEvent()
+        {
+            return View();
+        }
+
+        public ActionResult Donation()
+        {
+            return View();
+        }
+
+        public ActionResult Reflect()
+        {
+            return View();
+        }
+        public ActionResult Regstration_form()
+        {
+            return View();
+        }
     }
 }
