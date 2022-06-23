@@ -8,13 +8,13 @@ namespace Models.EF
 
     public partial class Details_receipt
     {
+        [Key, Column(Order = 1)]
         public int? ID_receipt { get; set; }
 
+        [Key, Column(Order = 2)]
         [StringLength(10)]
         public string ID_product { get; set; }
 
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Quantity { get; set; }
 
         public virtual Product Product { get; set; }

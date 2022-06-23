@@ -1,0 +1,16 @@
+﻿@using Models.EF
+@model List<Product>
+
+
+@if (Model != null && Model.Any())
+{
+    <option>Chọn sản phẩm</option>
+    foreach (var item in Model)
+    {
+        <option value="@item.ID_product">@item.Name_product</option>
+    }
+}
+else
+{
+    <option>Không có sản phẩm nào trong danh mục đã chọn</option>
+}

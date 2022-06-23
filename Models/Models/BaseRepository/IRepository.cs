@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Common;
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -21,6 +23,14 @@ namespace Models.BaseRepository
 
         Task<List<TEntity>> FindAllDescAsnyc<TEntity, Tkey>(Expression<Func<TEntity, bool>> where = null,
             Expression<Func<TEntity, Tkey>> orderSelector = null) where TEntity : class, Tkey;
+
+        Task<Pagination<TEntity>> FindPageAsnyc<TEntity>(int pageIndex, int pageSize,
+            Expression<Func<TEntity, bool>> where = null) where TEntity : class;
+
+        Task<List<TEntity>> FindAllForPageAsnyc<TEntity>(int pageIndex, int pageSize, 
+            Expression<Func<TEntity, bool>> where = null) where TEntity : class;
+
+
         Task<TEntity> FindAsnyc<TEntity>(Expression<Func<TEntity, bool>> where = null) where TEntity : class;
         Task<TEntity> FindAsnyc<TEntity, Tkey>(Tkey id) where TEntity : class, Tkey;
         Task SaveChangesAsync();

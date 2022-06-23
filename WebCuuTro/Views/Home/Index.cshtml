@@ -1,7 +1,8 @@
-﻿@{
+﻿@using Models.EF;
+@model List<Relief>
+@{
     ViewBag.Title = "Index";
 }
-
 <main>
     <section class="baner">
         <div class="banner-slider">
@@ -210,93 +211,56 @@
                 </div>
                 <div class="event-area container">
                     <div class="event-grid-items">
-                        <!-- Single Item  -->
-                        <div class="item">
-                            <div class="row">
-                                <div class="thumb col-lg-5" style="background-image: url(/Assets/Client/image/event/1.jpg);">
-                                    <div class="date">
-                                        12 <strong>Aug</strong>
+                        @if (Model != null && Model.Any())
+                        {
+                            foreach (var item in Model)
+                            {
+                                <div class="item">
+                                    <div class="row">
+                                        @if (item.Proofs != null && item.Proofs.Any())
+                                        {
+                                            <div class="thumb col-lg-5" style="background-image: url(@item.Proofs.First().Link);">
+                                                <div class="date">
+                                                    @item.Start_date.Value.Day <strong>@item.Start_date.Value.Month</strong>
+                                                </div>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="thumb col-lg-5" style="background-image: url(/Assets/Client/image/event/1.jpg);">
+                                                <div class="date">
+                                                    @item.Start_date.Value.Day <strong>@item.Start_date.Value.Month</strong>
+                                                </div>
+                                            </div>
+                                        }
+
+                                        <div class="info col-lg-7">
+                                            <h4>
+                                                <a href="@Url.Action("DetailEvent", new { id = item.ID_relieft })">@item.Title</a>
+                                            </h4>
+                                            <p>
+                                                @item.Content
+                                            </p>
+                                            <ul class="date">
+                                                @*<li>
+                                                        <i class="fas fa-clock"></i> @
+                                                    </li>*@
+                                                <li>
+                                                    <i class="fas fa-calendar-alt"></i> @item.map
+                                                </li>
+                                            </ul>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="info col-lg-7">
-                                    <h4>
-                                        <a href="#">Healty Food For Poor People</a>
-                                    </h4>
-                                    <p>
-                                        Called though excuse length ye needed it he having. Whatever throwing we on resolved entrance together graceful. Mrs assured add private married removed believe did she no he several excited am. peculiar families sensible.
-                                    </p>
-                                    <ul class="date">
-                                        <li>
-                                            <i class="fas fa-clock"></i> 10:00 AM - 18:00 PM
-                                        </li>
-                                        <li>
-                                            <i class="fas fa-calendar-alt"></i> 800 Loring Ave, Estancia
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- End Single Item  -->
-                        <!-- Single Item  -->
-                        <div class="item">
-                            <div class="row">
-                                <div class="thumb col-lg-5" style="background-image: url(/Assets/Client/image/event/2.jpg);">
-                                    <div class="date">
-                                        05 <strong>Sep</strong>
-                                    </div>
-                                </div>
-                                <div class="info col-lg-7">
-                                    <h4>
-                                        <a href="#">Water Facilities for People</a>
-                                    </h4>
-                                    <p>
-                                        Called though excuse length ye needed it he having. Whatever throwing we on resolved entrance together graceful. Mrs assured add private married removed believe did she no he several excited am. peculiar families sensible.
-                                    </p>
-                                    <ul class="date">
-                                        <li>
-                                            <i class="fas fa-clock"></i> 08:30 AM - 17:045 PM
-                                        </li>
-                                        <li>
-                                            <i class="fas fa-calendar-alt"></i> 800 Loring Ave, Estancia
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- End Single Item  -->
-                        <!-- Single Item  -->
-                        <div class="item">
-                            <div class="row">
-                                <div class="thumb col-lg-5" style="background-image: url(/Assets/Client/image/event/3.jpg);">
-                                    <div class="date">
-                                        29 <strong>Dec</strong>
-                                    </div>
-                                </div>
-                                <div class="info col-lg-7">
-                                    <h4>
-                                        <a href="#">Lifeskills for Children in South Africa</a>
-                                    </h4>
-                                    <p>
-                                        Called though excuse length ye needed it he having. Whatever throwing we on resolved entrance together graceful. Mrs assured add private married removed believe did she no he several excited am. peculiar families sensible.
-                                    </p>
-                                    <ul class="date">
-                                        <li>
-                                            <i class="fas fa-clock"></i> 09:45 AM - 15:30 PM
-                                        </li>
-                                        <li>
-                                            <i class="fas fa-calendar-alt"></i> 800 Loring Ave, Estancia
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        </div>
-                        <div class="relief-bottom">
-                            <a href="#" class="relief-bottom-more">
-                                Xem thêm ....
-                            </a>
-                        </div>
+                            }
+                        }
+                    </div>
+                    <div class="relief-bottom">
+                        <a href="@Url.Action("ViewAll", "Home")" class="relief-bottom-more">
+                            Xem thêm ....
+                        </a>
                     </div>
                 </div>
-</section>
+            </div>
+    </section>
 </main>

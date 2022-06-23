@@ -1,77 +1,176 @@
-﻿
+﻿@using Models.EF
+@model Relief
 @{
     ViewBag.Title = "Regstration_form";
+    var categories = ViewBag.categories as IEnumerable<categorize>;
 }
 <main>
-    <section class="form-group">
+    <section class="form-group" style="padding-top: 80px">
         <div class="container">
             <div class="form-group-main">
                 <h2>Tạo phiếu nhập</h2>
-                <div class="form-group-top">
-                    <div class="form-item">
-                        <label for="">Cá nhân/tổ chức ủng hộ</label>
-                        <input type="text" placeholder="Nhập tên công ty" />
-                    </div>
-                    <div class="form-item">
-                        <label for="">Đợt cứu trợ</label>
-                        <select>
-                            <option>Công ty XXXX</option>
-                            <option>Công ty XXXX</option>
-                            <option>Công ty XXXX</option>
-                        </select>
+                @if (ViewBag.Result == 1)
+                {
+                    <p class="alert alert-success">
+                        Cảm ơn bạn đã ủng hộ!
+                    </p>
+                }
+                @if (ViewBag.Result == 0)
+                {
+                    <p class="alert alert-success">
+                        Vui lòng điền đầy đủ thông tin!
+                    </p>
+                }
+
+                <form method="post">
+                    <div class="form-group-top">
+                        <div class="form-item">
+                            <label for="">Cá nhân/tổ chức ủng hộ</label>
+                            <input class="form-control" required type="text" placeholder="Nhập tên công ty" name="Name" />
+                        </div>
+                        <div class="form-item">
+                            <label for="">Đợt cứu trợ</label>
+                            <select class="form-control" name="RelieftId" required>
+                                <option value="@Model.ID_relieft" selected>@Model.Title</option>
+                            </select>
+                        </div>
+
+                        <div class="form-item">
+                            <label for="">Số điện thoại</label>
+                            <input class="form-control" type="text" placeholder="Your phone" name="PhoneNumber" />
+                        </div>
                     </div>
 
-                    <div class="form-item">
-                        <label for="">Số điện thoại</label>
-                        <input type="text" placeholder="Your phone" />
+                    <div class="form-group-content" style="width: 100% !important">
+                        <h2>Chi tiết phiếu nhập</h2>
+                        <table class="table table-bordered table-striped" id="tblChiTietPhieuNhap">
+                            <tr class="trAppend" style="display:none;">
+                                <td>
+                                    <select name="" class="ddlDanhMuc form-control" onchange="selectDanhMuc(this);">
+                                        <option>Chọn danh mục sản phẩm</option>
+                                        @foreach (var item in categories)
+                                        {
+                                            <option value="@item.ID_cate">
+                                                @item.Name_cate
+                                            </option>
+                                        }
+                                    </select>
+                                </td>
+                                <td>
+                                    <select name="" class="ddlSanPham form-control" onchange="selectSanPham(this);">
+                                        <option>Chọn danh mục sản phẩm trước</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <input type="number" name="" class="txtSoLuongNhap form-control" value="0" onchange="SoLuongSp(this);" />
+                                    <input type="hidden" class="maSp" />
+                                </td>
+                                <td><span class="btnDelete btn btn-danger">-</span></td>
+                            </tr>
+                            <tr class="trFirstChild" data-id="-1">
+                                <th style="width:30%">Danh mục</th>
+                                <th style="width:30%">Sản phẩm</th>
+                                <th style="width:15%">Số lượng</th>
+                                <th style="width:10%"></th>
+                            </tr>
+                        </table>
+
+                        <button class="form-group-add" type="button" id="btnAdd">Thêm</button>
                     </div>
-                </div>
-                <div class="form-group-content">
-                    <h2>Chi tiết phiếu nhập</h2>
-                    <div class="form-group-list">
-                        <div class="form-group-col">
-                            <p>Danh mục</p>
-                            <select name="" id="">
-                                <option>Lương thực</option>
-                                <option>Lương thực</option>
-                            </select>
-                            <select name="" id="">
-                                <option>Lương thực</option>
-                                <option>Lương thực</option>
-                            </select>
-                            <select name="" id="">
-                                <option>Lương thực</option>
-                                <option>Lương thực</option>
-                            </select>
-                        </div>
-                        <div class="form-group-col">
-                            <p>Đợt cứu trợ</p>
-                            <select name="" id="">
-                                <option>Gạo</option>
-                                <option>Gạo</option>
-                            </select>
-                            <select name="" id="">
-                                <option>Mỳ tôm</option>
-                                <option>Mỳ tôm</option>
-                            </select>
-                            <select name="" id="">
-                                <option>xèng</option>
-                                <option>xèng</option>
-                            </select>
-                        </div>
-                        <div class="form-group-col">
-                            <p>Số Lượng</p>
-                            <input type="text" placeholder="Nhập vào  số lượng" />
-                            <input type="text" placeholder="Nhập vào  số lượng" />
-                            <input type="text" placeholder="Nhập vào  số lượng" />
-                        </div>
-                    </div>
-                    <button class="form-group-add">Thêm</button>
-                </div>
+
+                    <button class="form-group-submit" type="submit">Tạo phiếu nhập</button>
+                </form>
+
+
             </div>
-            <button class="form-group-submit">Tạo phiếu nhập</button>
+
         </div>
     </section>
 
 </main>
 
+
+@section scripts{
+    <script>
+
+        $("#btnAdd").click(function () {
+            var id_cuoi = $("#tblChiTietPhieuNhap").find("tr:last-child").attr("data-id");
+            i = parseInt(id_cuoi) + 1;
+            var tdNoiDung = $(".trAppend").html();
+            var trNoiDung = "<tr class=\"trAppended\" id=\"" + i + "\" data-id=\"" + i + "\">" + tdNoiDung + "</tr>";
+            $("#tblChiTietPhieuNhap").append(trNoiDung);
+            loadIDLenThe();
+        });
+
+        function loadIDLenThe() {
+            $(".trAppended").each(function () {
+                var id = $(this).attr("data-id");
+
+                var nameMaDanhMuc = "[" + id + "].CategoryId";
+                var nameMaSanPham = "[" + id + "].ProductId";
+                var nameSoLuongNhap = "[" + id + "].Quantities";
+                var idDM = id + '_dm';
+                var idsp = id + '_sp';
+                var idsl = id + '_sl';
+
+                $(this).find(".ddlDanhMuc").prop("name", nameMaDanhMuc);
+                $(this).find(".ddlDanhMuc").prop("id", idDM);
+                $(this).find(".ddlSanPham").prop("name", nameMaSanPham);
+                $(this).find(".ddlSanPham").prop("id", idsp);
+                $(this).find(".txtSoLuongNhap").prop("name", nameSoLuongNhap);
+                $(this).find(".txtSoLuongNhap").prop("id", idsl);
+            });
+        };
+
+        function CapNhapID() {
+            var id_cuoi = $("#tblChiTietPhieuNhap").find(".trFirstChild").attr("data-id");
+            i = parseInt(id_cuoi) + 1;
+
+            $(".trAppended").each(function () {
+                var id = i;
+                $(this).attr("data-id", i);
+
+
+                var nameMaDanhMuc = "[" + id + "].CategoryId";
+                var nameMaSanPham = "[" + id + "].ProductId";
+                var nameSoLuongNhap = "[" + id + "].Quantities";
+                var idDM = id + '_dm';
+                var idsp = id + '_sp';
+                var idsl = id + '_sl';
+
+                $(this).find(".ddlDanhMuc").prop("name", nameMaDanhMuc);
+                $(this).find(".ddlDanhMuc").prop("id", idDM);
+                $(this).find(".ddlSanPham").prop("name", nameMaSanPham);
+                $(this).find(".ddlSanPham").prop("id", idsp);
+                $(this).find(".txtSoLuongNhap").prop("name", nameSoLuongNhap);
+                $(this).find(".txtSoLuongNhap").prop("id", idsl);
+
+                i++;
+            });
+        };
+
+        //Xóa thẻ
+        $("body").delegate(".btnDelete", "click", function () {
+            $(this).closest(".trAppended").remove();
+            CapNhapID();
+        });
+
+        function selectDanhMuc(item) {
+            console.log(item)
+            var danhMucId = item.value;
+            console.log(danhMucId)
+            var id = item.id.split('_')[0];
+            $.ajax({
+                type: 'get',
+                url: '/Home/OptionProduct',
+                data: {
+                    categoryId: danhMucId
+                },
+                success: function (res) {
+                    $("#" + id + "_sp").html(res);
+                }
+            })
+        }
+    </script>
+
+}

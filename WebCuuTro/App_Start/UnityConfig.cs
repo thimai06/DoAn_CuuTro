@@ -1,4 +1,8 @@
+using Application.CategoryServices;
 using Application.DistrictServices;
+using Application.ProductServices;
+using Application.ReceiptServices;
+using Application.ReliefServices;
 
 using Models.BaseRepository;
 
@@ -15,6 +19,11 @@ namespace WebCuuTro
 			var container = new UnityContainer();
             container.RegisterType<IRepository, Repository>();
             container.RegisterType<IDistrictService, DistrictService>();
+            container.RegisterType<IReliefService, ReliefService>();
+            container.RegisterType<ICategoryService, CategoryService>();
+            container.RegisterType<IProductService, ProductService>();
+            container.RegisterType<IReceiptService, ReceiptService>();
+
 
             // e.g. container.RegisterType<ITestService, TestService>();
 

@@ -1428,6 +1428,7 @@
     <Content Include="Views\Home\Reflect.cshtml" />
     <Content Include="Views\Home\Regstration_form.cshtml" />
     <Content Include="Views\Home\ViewAll.cshtml" />
+    <Content Include="Views\Home\OptionProduct.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1452,6 +1453,10 @@
     <ProjectReference Include="..\Application\Application.csproj">
       <Project>{c6a0f26e-d730-45f1-a137-bd7843d3f34e}</Project>
       <Name>Application</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{6B05F46F-0073-44BF-9A41-1498F78712FC}</Project>
+      <Name>Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\Models\Models\Models.csproj">
       <Project>{4049ce53-5865-40de-8fa6-5343684a8639}</Project>

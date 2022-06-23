@@ -31,7 +31,7 @@
                 </div>
                 <nav>
                     <ul class="header-menu">
-                        <li class="header-menu-item"><a href="#" class="header-menu-link">Trang chủ</a></li>
+                        <li class="header-menu-item"><a href="@Url.Action("Index","Home")" class="header-menu-link">Trang chủ</a></li>
                         <li class="header-menu-item"><a href="#" class="header-menu-link">Công khai</a></li>
                         <li class="header-menu-item"><a href="#" class="header-menu-link">Đề xuất cứu trợ</a></li>
                         <li class="header-menu-item"><a href="#" class="header-menu-link">Bản đồ cứu trợ</a></li>
@@ -78,5 +78,6 @@
     <script src="~/Assets/Client/library/slick/slick.js"></script>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script src="~/Assets/Client/js/main.js"></script>
+    @RenderSection("scripts", false)
 </body>
 </html>

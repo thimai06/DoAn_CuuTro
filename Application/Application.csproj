@@ -44,9 +44,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CategoryServices\CategoryService.cs" />
+    <Compile Include="CategoryServices\ICategoryService.cs" />
     <Compile Include="DistrictServices\DistrictService.cs" />
     <Compile Include="DistrictServices\IDistrictService.cs" />
+    <Compile Include="ProductServices\IProductService.cs" />
+    <Compile Include="ProductServices\ProductService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReceiptServices\IReceiptService.cs" />
+    <Compile Include="ReceiptServices\ReceiptService.cs" />
+    <Compile Include="ReliefServices\IReliefService.cs" />
+    <Compile Include="ReliefServices\ReliefService.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

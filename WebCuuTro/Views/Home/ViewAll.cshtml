@@ -1,4 +1,7 @@
-﻿@{
+﻿@using Models.EF;
+@model List<Relief>
+
+@{
     ViewBag.Title = "Toàn bộ sự kiện";
 }
 
@@ -10,177 +13,60 @@
                     <div class="col-lg-12">
                         @*<h2>Latest Event</h2>*@
                     </div>
-                </div>                
+                </div>
             </div>
         </div>
     </div>
     <div class="event-area container">
         <div class="event-grid-items">
-            <!-- Single Item  -->
-            <div class="item">
-                <div class="row">
-                    <div class="thumb col-lg-5" style="background-image: url(/Assets/Client/image/event/1.jpg);">
-                        <div class="date">
-                            12 <strong>Aug</strong>
+            @if (Model != null && Model.Any())
+            {
+                foreach (var item in Model)
+                {
+                    <div class="item">
+                        <div class="row">
+                            @if (item.Proofs != null && item.Proofs.Any())
+                            {
+                                <div class="thumb col-lg-5" style="background-image: url(@item.Proofs.First().Link);">
+                                    <div class="date">
+                                        @item.Start_date.Value.Day <strong>@item.Start_date.Value.Month</strong>
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="thumb col-lg-5" style="background-image: url(/Assets/Client/image/event/1.jpg);">
+                                    <div class="date">
+                                        @item.Start_date.Value.Day <strong>@item.Start_date.Value.Month</strong>
+                                    </div>
+                                </div>
+                            }
+
+                            <div class="info col-lg-7">
+                                <h4>
+                                    <a href="@Url.Action("DetailEvent", new { id = item.ID_relieft })">@item.Title</a>
+                                </h4>
+                                <p>
+                                    @item.Content
+                                </p>
+                                <ul class="date">
+                                    @*<li>
+                                    <i class="fas fa-clock"></i> @
+                                </li>*@
+                                    <li>
+                                        <i class="fas fa-calendar-alt"></i> @item.map
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                    <div class="info col-lg-7">
-                        <h4>
-                            <a href="#">Sạc lỡ đất ở Điện An</a>
-                        </h4>
-                        <p>
-                            Do ảnh hưởng của rãnh áp thấp, gây mưa diện rộng trên địa bàn tỉnh Cao Bằng,
-                            mưa vừa, mưa to cục bộ, có nơi mưa rất to làm ngập úng, sạt lở đất đá gây 
-                            thiệt hại về người, nhà cửa và hoa màu của nhân dân.
-                        </p>
-                        <ul class="date">
-                            <li>
-                                <i class="fas fa-clock"></i> 19/06/2022 - 22/07/2022
-                            </li>
-                            <li>
-                                <i class="fas fa-calendar-alt"></i> Điện An - Quảng Nam
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <!-- End Single Item  -->
-            <!-- Single Item  -->
-            <div class="item">
-                <div class="row">
-                    <div class="thumb col-lg-5" style="background-image: url(/Assets/Client/image/event/2.jpg);">
-                        <div class="date">
-                            05 <strong>Sep</strong>
-                        </div>
-                    </div>
-                    <div class="info col-lg-7">
-                        <h4>
-                            <a href="#">Cứu trợ bão lũ Đại Lộc</a>
-                        </h4>
-                        <p>
-                            Do ảnh hưởng của rãnh áp thấp, gây mưa diện rộng trên địa bàn tỉnh Cao Bằng,
-                            mưa vừa, mưa to cục bộ, có nơi mưa rất to làm ngập úng, sạt lở đất đá gây
-                            thiệt hại về người, nhà cửa và hoa màu của nhân dân.
-                        </p>
-                        <ul class="date">
-                            <li>
-                                <i class="fas fa-clock"></i> 19/06/2022 - 22/07/2022
-                            </li>
-                            <li>
-                                <i class="fas fa-calendar-alt"></i> Đại Lộc - Quảng Nam
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <!-- End Single Item  -->
-            <!-- Single Item  -->
-            <div class="item">
-                <div class="row">
-                    <div class="thumb col-lg-5" style="background-image: url(/Assets/Client/image/event/3.jpg);">
-                        <div class="date">
-                            29 <strong>Dec</strong>
-                        </div>
-                    </div>
-                    <div class="info col-lg-7">
-                        <h4>
-                            <a href="#">Cứu trợ bão lũ Điện Bàn</a></h4>
-                        <p>
-                            Do ảnh hưởng của rãnh áp thấp, gây mưa diện rộng trên địa bàn tỉnh Cao Bằng,
-                            mưa vừa, mưa to cục bộ, có nơi mưa rất to làm ngập úng, sạt lở đất đá gây
-                            thiệt hại về người, nhà cửa và hoa màu của nhân dân.
-                        </p>
-                        <ul class="date">
-                            <li>
-                                <i class="fas fa-clock"></i>  19/06/2022 - 22/07/2022
-                            </li>
-                            <li>
-                                <i class="fas fa-calendar-alt"></i> Điện Bàn - Quảng Nam
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="item">
-                <div class="row">
-                    <div class="thumb col-lg-5" style="background-image: url(/Assets/Client/image/event/3.jpg);">
-                        <div class="date">
-                            29 <strong>Dec</strong>
-                        </div>
-                    </div>
-                    <div class="info col-lg-7">
-                        <h4>
-                            <a href="#">Lifeskills for Children in South Africa</a>
-                        </h4>
-                        <p>
-                            Called though excuse length ye needed it he having. Whatever throwing we on resolved entrance together graceful. Mrs assured add private married removed believe did she no he several excited am. peculiar families sensible.
-                        </p>
-                        <ul class="date">
-                            <li>
-                                <i class="fas fa-clock"></i> 09:45 AM - 15:30 PM
-                            </li>
-                            <li>
-                                <i class="fas fa-calendar-alt"></i> 800 Loring Ave, Estancia
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="item">
-                <div class="row">
-                    <div class="thumb col-lg-5" style="background-image: url(/Assets/Client/image/event/3.jpg);">
-                        <div class="date">
-                            29 <strong>Dec</strong>
-                        </div>
-                    </div>
-                    <div class="info col-lg-7">
-                        <h4>
-                            <a href="#">Lifeskills for Children in South Africa</a>
-                        </h4>
-                        <p>
-                            Called though excuse length ye needed it he having. Whatever throwing we on resolved entrance together graceful. Mrs assured add private married removed believe did she no he several excited am. peculiar families sensible.
-                        </p>
-                        <ul class="date">
-                            <li>
-                                <i class="fas fa-clock"></i> 09:45 AM - 15:30 PM
-                            </li>
-                            <li>
-                                <i class="fas fa-calendar-alt"></i> 800 Loring Ave, Estancia
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="item">
-                <div class="row">
-                    <div class="thumb col-lg-5" style="background-image: url(/Assets/Client/image/event/3.jpg);">
-                        <div class="date">
-                            29 <strong>Dec</strong>
-                        </div>
-                    </div>
-                    <div class="info col-lg-7">
-                        <h4>
-                            <a href="#">Lifeskills for Children in South Africa</a>
-                        </h4>
-                        <p>
-                            Called though excuse length ye needed it he having. Whatever throwing we on resolved entrance together graceful. Mrs assured add private married removed believe did she no he several excited am. peculiar families sensible.
-                        </p>
-                        <ul class="date">
-                            <li>
-                                <i class="fas fa-clock"></i> 09:45 AM - 15:30 PM
-                            </li>
-                            <li>
-                                <i class="fas fa-calendar-alt"></i> 800 Loring Ave, Estancia
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+                }
+            }
         </div>
-        <div class="relief-bottom">
+        @*<div class="relief-bottom">
             <a href="#" class="relief-bottom-more">
                 Xem thêm ....
             </a>
-        </div>
+        </div>*@
     </div>
 </main>
