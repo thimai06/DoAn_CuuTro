@@ -60,10 +60,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants.cs" />
+    <Compile Include="DAO\CategorizeDao.cs" />
+    <Compile Include="DAO\Details_ReceiptDao.cs" />
     <Compile Include="DAO\PersonalDao.cs" />
+    <Compile Include="DAO\ProductDAO.cs" />
     <Compile Include="DAO\ReceiptDao.cs" />
     <Compile Include="DAO\Registration_formDao.cs" />
     <Compile Include="DAO\ReliefDao.cs" />
+    <Compile Include="DAO\Details_Restration_formDao.cs" />
+    <Compile Include="DAO\Relief_classificationDao.cs" />
     <Compile Include="EF\categorize.cs" />
     <Compile Include="EF\DB_Relief.cs" />
     <Compile Include="EF\Details_receipt.cs" />

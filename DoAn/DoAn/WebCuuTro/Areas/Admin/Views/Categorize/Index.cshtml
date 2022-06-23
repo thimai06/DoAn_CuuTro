@@ -1,0 +1,69 @@
+﻿@model IEnumerable<Models.EF.categorize>
+
+@using PagedList;
+@using PagedList.Mvc
+    @{
+        ViewBag.Title = "Index";
+        Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    }
+
+    @section header{
+        <div style="display:flex;">
+            <i class="fa fa-user" style="font-size:30px; margin-top:20px;margin-left:10px"> </i>
+            <h3>&nbsp;Quản lý người dùng</h3>
+        </div>
+    }
+
+    @using (Html.BeginForm("Index", "Categorize", FormMethod.Post))
+    {
+        <div class="col-lg-12 form-group" style="margin-top:20px">
+            <div class="col-md-6">
+                <p>
+                    @Html.ActionLink("Tạo Mới", "Create", "Categorize", new { @class = "btn btn-danger" })
+                </p>
+            </div>
+
+            <div class="col-md-3">
+                <input type="text" value="@ViewBag.SearchString" name="searchString" placeholder="Nhập từ khóa cần tìm kiếm" class="form-control" />
+            </div>
+            <div class="col-md-2">
+                <input type="submit" value="Tìm Kiếm" class="btn btn-info" />
+            </div>
+        </div>
+    }
+
+    ---
+    <div class="table-responsive">
+        <div>
+            <table class="table  table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th class="text-center text-primary yellow-bg-prd">STT</th>
+                        <th class="text-center text-primary yellow-bg-prd">Mã mục lục</th>
+                        <th class="text-center text-primary yellow-bg-prd">Tên mục lục</th>
+                        <th class="text-center text-primary yellow-bg-prd">Thao Tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{ int i = 1;}
+                    @foreach (var item in Model)
+                    {
+                        <tr id="row_@item.ID_cate">
+                            <td class="tab-bg-dark-navy-blue" align="center">@i</td>
+                            <td align="center">@item.ID_cate</td>
+                            <td align="center">@item.Name_cate </td>
+
+                            <td align="center">                               
+                                <a href="~/Admin/Categorize/Edit?id=@item.ID_cate"><i class="fa fa-edit text-primary" style="font-size:20px;"></i></a>
+                               
+                            </td>
+                        </tr>
+                        i = i + 1;
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div>
+        @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page, @searchString = @ViewBag.SearchString }))
+    </div>

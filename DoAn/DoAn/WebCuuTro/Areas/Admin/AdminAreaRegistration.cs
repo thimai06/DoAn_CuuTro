@@ -19,6 +19,29 @@ namespace WebCuuTro.Areas.Admin
                 "Admin/{controller}/{action}/{id}",
                 new { action = "Index", id = UrlParameter.Optional }
             );
+            context.MapRoute(
+                name: "ChiTietNguoiDung",
+                url: "Admin/{controller}/{action}",
+                defaults: new {controller = "Personal", action = "Details", id = UrlParameter.Optional }
+            );
+            context.MapRoute(
+                name: "ChinhSuaNguoiDung",
+                url: "Admin/{controller}/{action}",
+                defaults: new { controller = "Personal", action = "Edit", id = UrlParameter.Optional }
+            );
+            context.MapRoute(
+                name: "XemChiTietDangKy",
+                url: "Admin/{controller}/{action}",
+                defaults: new { controller = "Registration", action = "Details", id = UrlParameter.Optional }
+            );
+
+            
+            context.MapRoute(
+                name: "ChinhSuaDanhMuc",
+                url: "Admin/{controller}/{action}",
+                defaults: new { controller = "Categorize", action = "Edit", id = UrlParameter.Optional }
+            );
+            
         }
     }
 }

@@ -36,13 +36,65 @@ namespace WebCuuTro.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(string searchString, int page = 1, int pagesize = 5)
+        public ActionResult Index(string searchString, int page = 1, int pagesize = 10)
         {
             var pr = new ReceiptDao();
             var model = pr.LisWheretAll(searchString, page, pagesize);
             ViewBag.SearchString = searchString;
             return View(model);
         }
+        [HttpGet]
+        public ActionResult Create()
+        {
+            SyncUpData();
+            return View();
+        }
+
+        public void SyncUpData ()
+        {
+            var reDao = new ReliefDao();
+            var prDao = new ProductDAO();
+            var catDao = new ProductDAO();
+
+            ViewBag.ID_relieft = new SelectList(reDao.ListAll(), "ID_relieft", "Title");
+            ViewBag.Products = new SelectList(prDao.ListAll(), "ID_product", "Name_product");
+            ViewBag.Categories = new SelectList(catDao.ListAll(), "ID_cate", "Name_cate");
+        }
+
+        [HttpPost]
+        public ActionResult Create(ReceiptModel enti_re)
+        {
+            if (ModelState.IsValid)
+            {
+                var dao = new ReceiptDao();
+                if (dao.Find( enti_re.ID_receipt) != null)
+                {
+                    return RedirectToAction("Create", "User");
+                }
+                var receiptTemp = new Receipt();
+                //receiptTemp.ID_relieft = enti_re.
+                //dao.Insert(enti_re);
+                //if (!String.IsNullOrEmpty(result))
+                //{
+                return RedirectToAction("Index", "Receipt");
+
+                //}
+                //else
+                //{
+                //    ModelState.AddModelError("", "Tạo không thành công");
+                //}
+            }
+            SyncUpData();
+            //ViewBag.ID_relieft = new SelectList(db.Reliefs, "ID_relieft", "Title", enti_re.ID_relieft);
+       
+           
+            return View();
+
+        }
+
+
+
+
         [HttpGet]
         public ActionResult Details(string id)
         {

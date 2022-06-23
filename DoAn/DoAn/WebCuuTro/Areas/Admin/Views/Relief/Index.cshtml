@@ -52,22 +52,23 @@
                     @{ int i = 1;}
                     @foreach (var item in Model)
                     {
-                    <tr id="row_@item.ID_relieft">
-                        <td class="tab-bg-dark-navy-blue" align="center">@i</td>
-                        <td align="center">@item.Title</td>
-                        <td>@item.Description</td>
-                        <td align="center">@item.Content </td>
-                        <td align="center">@item.Ward.Name_ward </td>
-                        <td align="center">@item.Relief_classification.Description </td>
-                        <td align="center">@item.Time_sent_post </td>
-                        <td align="center">@item.status </td>
-                       
-                        <td align="center">
-                            <a href="~/Admin/Relief/Details/@item.ID_relieft"><i class="fa fa-question-circle text-warning" style="font-size:20px;"></i></a>
-                            <a href="~/Admin/Relief/Edit/@item.ID_relieft"><i class="fa fa-edit text-primary" style="font-size:20px;"></i></a>
-                            <a href="~/Admin/Relief/Delete/@item.ID_relieft"><i class="fa fa-trash-o text-danger " style="font-size:20px;" onclick="return confirm('Bạn có chắc chắn muốn xóa @item.Title không ?');"></i></a>
-                        </td>
-                    </tr>
+                        <tr id="row_@item.ID_relieft">
+                            <td class="tab-bg-dark-navy-blue" align="center">@i</td>
+                            <td align="center">@item.Title</td>
+                            <td>@item.Description</td>
+                            <td align="center">@item.Content </td>
+                            <td align="center">@item.Ward.Name_ward </td>
+                            <td align="center">@item.Relief_classification.Description </td>
+                            <td align="center">@item.Time_sent_post </td>
+                            @if(item.status == "1"){ <td align="center">Chưa duyệt</td> }
+                            else { <td align="center">Đã duyệt</td>}
+
+                            <td align="center">
+                                <a href="~/Admin/Relief/Details/@item.ID_relieft"><i class="fa fa-question-circle text-warning" style="font-size:20px;"></i></a>
+                                <a href="~/Admin/Relief/Edit/@item.ID_relieft"><i class="fa fa-edit text-primary" style="font-size:20px;"></i></a>
+                                <a href="~/Admin/Relief/Delete/@item.ID_relieft"><i class="fa fa-trash-o text-danger " style="font-size:20px;" onclick="return confirm('Bạn có chắc chắn muốn xóa @item.Title không ?');"></i></a>
+                            </td>
+                        </tr>
                         i = i + 1;
                     }
                 </tbody>

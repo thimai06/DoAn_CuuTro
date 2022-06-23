@@ -65,25 +65,27 @@ namespace Models.DAO
             db.SaveChanges();
             return enti_pe.Personal_name;
         }
-        public Pesonal ViewDetail(String id)
-        {
-            return db.Pesonals.Find(id);
-        }
+        //public Pesonal ViewDetail(String id)
+        //{
+        //    return db.Pesonals.Find(id);
+        //}
         public Pesonal Find(string id)
         {
             return db.Pesonals.Find(id);
         }
-        public bool Detele(String id)
+        public bool Detele(string id)
         {
             try
             {
-                var pe = db.Pesonals.Find(id);
+                Pesonal pe = db.Pesonals.Find(id);
                 db.Pesonals.Remove(pe);
                 db.SaveChanges();
                 return true;
             }
-            catch (Exception ex) { return false; }
+            catch (Exception ex)
+            {
+                return false;
+            }
         }
-
     }
 }

@@ -27,10 +27,14 @@ namespace WebCuuTro.Areas.Admin.Controllers
             }
             return model.OrderBy(x => x.Personal_name).ToPagedList(page, pagesize);
         }
-        public ActionResult Index(int page = 1, int pagesize = 5)
+        public ActionResult Index(int page = 1, int pagesize = 5, string error = "")
         {
             var pr = new PersonalDao();
             var model = pr.ListAll();
+            if (error == "error")
+            {
+                ModelState.AddModelError("", "Tài khoản hiện không xóa được?");
+            }
             return View(model.ToPagedList(page, pagesize));
         }
 
@@ -40,6 +44,7 @@ namespace WebCuuTro.Areas.Admin.Controllers
             var pr = new PersonalDao();
             var model = pr.LisWheretAll(searchString, page, pagesize);
             ViewBag.SearchString = searchString;
+            
             return View(model);
         }
 
@@ -86,14 +91,15 @@ namespace WebCuuTro.Areas.Admin.Controllers
             return View();
 
         }
+        
         [HttpGet]
-        public ActionResult Edit(string id)
+        public ActionResult Edit(string userId)
         {
-            if (id == null)
+            if (userId == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Pesonal pe = db.Pesonals.Find(id);
+            Pesonal pe = db.Pesonals.Find(userId);
             if (pe == null)
             {
                 return HttpNotFound();
@@ -115,15 +121,13 @@ namespace WebCuuTro.Areas.Admin.Controllers
             return View(enti_pe);
         }
             
-        [HttpGet]
-        [ValidateAntiForgeryToken]
-        public ActionResult Details(string id)
+        public ActionResult Details(string userId)
         {
-            if (id == null)
+            if (userId == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Pesonal pe = db.Pesonals.Find(id);
+            Pesonal pe = db.Pesonals.Find(userId);
             if (pe == null)
             {
                 return HttpNotFound();
@@ -131,10 +135,15 @@ namespace WebCuuTro.Areas.Admin.Controllers
             return View(pe);
         }
 
-        public ActionResult Delete(String id)
+        public ActionResult Delete(string userId)
         {
-            Boolean dao = new PersonalDao().Detele(id);
+            bool dao = new PersonalDao().Detele(userId);
+            if (!dao)
+            {
+                return RedirectToAction("Index", new{ error = "error"});
+            }
             return RedirectToAction("Index");
         }
     }
 }
+

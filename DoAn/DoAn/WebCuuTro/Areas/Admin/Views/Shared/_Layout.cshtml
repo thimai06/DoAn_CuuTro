@@ -59,9 +59,7 @@
                                     <i class="fa fa-magic"></i>
                                     <span>Quản lý Đợt cứu trợ</span>
                                 </a>
-                                <ul class="sub">
-                                    <li>@Html.ActionLink("Thêm Đợt cứu trợ", "Create", "Relief")</li>
-                                    @*<li>@Html.ActionLink("Quản Lý Loại", "Index", "LoaiSP")</li>*@
+                                <ul class="sub">                                   
                                     <li>@Html.ActionLink("Danh Sách các đợt cứu trợ", "Index", "Relief")</li>
                                 </ul>
                             </li>
@@ -70,9 +68,7 @@
                                     <i class="fa fa-magic"></i>
                                     <span>Quản lý Đăng ký ủng hộ</span>
                                 </a>
-                                <ul class="sub">
-                                    <li>@Html.ActionLink("Thêm Đăng ký", "Create", "Registration_form")</li>
-                                    @*<li>@Html.ActionLink("Quản Lý Loại", "Index", "LoaiSP")</li>*@
+                                <ul class="sub">                                    
                                     <li>@Html.ActionLink("Danh Sách Đăng ký ủng hộ", "Index", "Registration_form")</li>
                                 </ul>
                             </li>
@@ -83,8 +79,7 @@
                                     <span>Quản lý Phiếu nhập</span>
                                 </a>
                                 <ul class="sub">
-                                    <li>@Html.ActionLink("Thêm Phiếu nhập", "Create", "Receipt")</li>
-                                    @*<li>@Html.ActionLink("Quản Lý Loại", "Index", "LoaiSP")</li>*@
+                                    <li>@Html.ActionLink("Tạo Phiếu nhập", "Create", "Receipt")</li>                                   
                                     <li>@Html.ActionLink("Danh Sách Phiếu nhập", "Index", "Receipt")</li>
                                 </ul>
                             </li>
@@ -95,9 +90,20 @@
                                     <span>Quản lý loại cứu trợ</span>
                                 </a>
                                 <ul class="sub">
-                                    <li>@Html.ActionLink("Thêm loại cứu trợ", "Create", "LoaiSP")</li>
-                                    @*<li>@Html.ActionLink("Quản Lý Loại", "Index", "LoaiSP")</li>*@
-                                    <li>@Html.ActionLink("Danh Sách các loại cứu trợ", "Index", "LoaiSP")</li>
+                                    <li>@Html.ActionLink("Thêm loại cứu trợ", "Create", "Relief_classification")</li>                                    
+                                    <li>@Html.ActionLink("Danh Sách các loại cứu trợ", "Index", "Relief_classification")</li>
+                                </ul>
+                            </li>
+
+                            <li class="sub-menu">
+                                <a href="javascript:;">
+                                    <i class="fa fa-magic"></i>
+                                    <span>Quản lý danh mục</span>
+                                </a>
+                                <ul class="sub">
+                                    <li>@Html.ActionLink("Thêm danh mục", "Create", "Categorize")</li>
+                           
+                                    <li>@Html.ActionLink("Danh Sách danh mục", "Index", "Categorize")</li>
                                 </ul>
                             </li>
 
@@ -194,5 +200,6 @@
             $('#AlertBox').delay("5000").slideUp("500");
         });
     </script>
+    @RenderSection("Scripts", false);
 </body>
 </html>
