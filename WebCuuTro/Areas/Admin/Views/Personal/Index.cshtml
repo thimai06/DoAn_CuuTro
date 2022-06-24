@@ -14,7 +14,6 @@
         <h3>&nbsp;Quản lý người dùng</h3>
     </div>
 }
-
 @using (Html.BeginForm("Index", "Personal", FormMethod.Post))
 {
     <div class="col-lg-12 form-group" style="margin-top:20px">
@@ -36,6 +35,7 @@
 ---
 <div class="table-responsive">
     <div>
+        @Html.ValidationSummary(true, null, new { @class = "alert alert-danger" })
         <table class="table  table-bordered table-hover">
             <thead>
                 <tr>
@@ -54,22 +54,21 @@
                 @{ int i = 1;}
                 @foreach (var item in Model)
                 {
-                <tr id="row_@item.ID_user">
-                    <td class="tab-bg-dark-navy-blue" align="center">@i</td>
-                    <td align="center">@item.ID_user</td>
-                    <td>@item.Personal_name</td>
-                    <td align="center">@item.password </td>
-                    <td align="center">@item.ID_card </td>
-                    <td align="center">@item.Address </td>
-                    <td align="center">@item.Gender </td>
-                    <td align="center">@item.Phone </td>
-                    <td align="center">
-                        
-                        <a href="~/Admin/Personal/Details/@item.ID_user"><i class="fa fa-question-circle text-warning" style="font-size:20px;"></i></a>
-                        <a href="~/Admin/Personal/Edit/@item.ID_user"><i class="fa fa-edit text-primary" style="font-size:20px;"></i></a>
-                        <a href="~/Admin/Personal/Delete/@item.ID_user"><i class="fa fa-trash-o text-danger " style="font-size:20px;" onclick="return confirm('Bạn có chắc chắn muốn xóa @item.Personal_name không ?');"></i></a>
-                    </td>
-                </tr>
+                    <tr id="row_@item.ID_user">
+                        <td class="tab-bg-dark-navy-blue" align="center">@i</td>
+                        <td align="center">@item.ID_user</td>
+                        <td>@item.Personal_name</td>
+                        <td align="center">@item.password </td>
+                        <td align="center">@item.ID_card </td>
+                        <td align="center">@item.Address </td>
+                        <td align="center">@item.Gender </td>
+                        <td align="center">@item.Phone </td>
+                        <td align="center">
+                            <a href="~/Admin/Personal/Details?userId=@item.ID_user"><i class="fa fa-question-circle text-warning" style="font-size:20px;"></i></a>
+                            <a href="~/Admin/Personal/Edit?userId=@item.ID_user"><i class="fa fa-edit text-primary" style="font-size:20px;"></i></a>
+                            <a href="~/Admin/Personal/Delete?userId=@item.ID_user"><i class="fa fa-trash-o text-danger " style="font-size:20px;" onclick="return confirm('Bạn có chắc chắn muốn xóa @item.Personal_name không ?');"></i></a>
+                        </td>
+                    </tr>
                     i = i + 1;
                 }
             </tbody>

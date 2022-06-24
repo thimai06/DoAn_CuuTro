@@ -1,0 +1,15 @@
+﻿@using Models.EF
+@model List<Ward>
+
+@if (Model != null && Model.Any())
+{
+    <option>Chọn phường/ xã</option>
+    foreach (var item in Model)
+    {
+        <option value="@item.ID_ward">@item.Name_ward</option>
+    }
+}
+else
+{
+    <option>Không có phường xã nào trong quận huyện đã chọn!</option>
+}

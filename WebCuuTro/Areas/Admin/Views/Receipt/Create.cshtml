@@ -1,0 +1,145 @@
+﻿@model WebCuuTro.Areas.Admin.Models.ReceiptModel
+@using Models;
+@using WebCuuTro.Areas.Admin.Models;
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    table {
+        width: 60%;
+        border-collapse: collapse
+    }
+    table, tr, th, td {
+        border: 1px solid #ddd;
+        border-collapse: collapse;
+        padding: 10px 10px;
+        text-align: center;
+    }
+    
+</style>
+
+@section header{
+    <div style="display:flex;">
+        <i class="fa fa-user" style="font-size:30px; margin-top:20px;margin-left:10px"> </i>
+        <h3>&nbsp;Tạo Phiếu Nhập</h3>
+    </div>
+}
+
+
+
+@using (Html.BeginForm("Create", "Receipt"))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <div class="form-group">
+            @Html.ActionLink("Back to List", "Index", "Receipt", new { @class = "btn btn-success" })
+        </div>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+        <div class="form-group col-md-6">
+            <label class=" control-label col-md-2  " style="width:100%;text-align:left; margin-bottom:10px; font-weight:600; font-size:16px"> Title </label>
+            @*@Html.LabelFor(model => model.Relief.Title, new { htmlAttributes = new { @for = "form-check-label" } });*@
+            @Html.DropDownListFor(model => model.ID_relieft, ViewBag.ID_relieft as SelectList, new { @class = "form-control" })
+        </div>
+        <div>
+            @{
+                var session = (LoginModel)Session[Constants.USER_SESSION];
+            }
+            @Html.HiddenFor(model => model.ID_user, new { @Value = session.Username })
+            @Html.HiddenFor(model => model.Date, new { @class = "form-control", @Value = DateTime.Now })
+        </div>
+
+        <div class="form-group col-md-6 " style="margin-left: 0">
+            <label class=" control-label col-md-2 " style="width:100%;text-align:left; margin-bottom:10px;font-weight:600; font-size:16px"> Đơn vị tặng </label>
+            @Html.EditorFor(model => model.Nguoitang, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Nguoitang, "", new { @class = "text-danger" })
+        </div>
+        <table >
+            <thead>
+                <tr>
+                    <th >STT</th>
+                    <th >Product</th>
+                    <th >Quantity</th>
+                    <th ></th>
+                </tr>
+            </thead>
+            <tbody id="detailTable">
+                <tr>
+                    <td >1</td>
+                    <td >
+                        @Html.DropDownListFor(item => item.Details_receipt[0].ID_product, ViewBag.Products as SelectList, new { @class = "form-control" })
+                    </td>
+                    <td >
+                        @Html.EditorFor(item => item.Details_receipt[0].Quantity, new { htmlAttributes = new { @class = "form-control" } })
+                    </td>
+                    <td>
+                        
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td> <button id="btnAdd">Add</button></td>
+                </tr>
+                
+            </tfoot>
+        </table>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input style="margin-top:20px;" type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts{
+    
+    <script language="javascript">
+        $(document).ready(function () {
+          
+
+            $("#btnAdd").click(function (e) {
+                e.preventDefault();
+                var tableBody = $("#detailTable");
+                var trLast = tableBody.find("tr:last");
+                var trNew = trLast.clone();
+
+                var index = trNew.find(":input:first").attr("name").match(/\d+/);
+
+               
+                $.each(trNew.find(':input'), function (i, val) {
+                    var oldN = $(this).attr('name');
+                    if (oldN !== undefined) {
+                        var newN = oldN.replace('[' + index + ']', '[' + (parseInt(index) + 1) + ']');
+                    
+                        $(this).attr('name', newN);
+                        console.log(oldN);
+
+                    }
+                    
+                    var name = $(this).attr('name');
+                    if (name !== undefined && name.includes('Quantity')) {
+                        $(this).val(0);
+                    }
+                    if (name !== undefined && name.includes('ID_product')) {
+                        $(this).val(0);
+                    }
+                })
+                trNew.find('td:last').html('<button name="btnRemove" onClick="handleRemove(this)" type="button">Remove</button>');
+                trNew.find('td:first').html(parseInt(index) + 2);
+
+                trLast.after(trNew);
+            });
+           
+        })
+        function handleRemove(element) {
+            element.parentNode.parentNode.remove();
+        }
+    </script>
+}

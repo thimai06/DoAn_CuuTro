@@ -19,9 +19,14 @@ namespace Models.DAO
         {
             return db.Receipts.ToList();
         }
-        public Receipt Find(string id)
+        public Receipt Find(int id)
         {
             return db.Receipts.Find(id);
+        }
+        public void Insert(Receipt enti_re)
+        {
+            db.Receipts.Add(enti_re);
+            db.SaveChanges();
         }
         public IEnumerable<Receipt> LisWheretAll(string keysearch, int page, int pagesize)
         {

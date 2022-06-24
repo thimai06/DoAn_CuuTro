@@ -3,6 +3,7 @@
 
 @{
     ViewBag.Title = Model.Title;
+    var ward = ViewBag.ward as Ward;
 }
 
 <main>
@@ -45,6 +46,8 @@
                             <p>
                                 @Model.Content
                             </p>
+                            
+                            <p>Địa chỉ nhận ủng hộ: @ward.Name_ward - @ward.District.Name_district</p>
                             <a class="btn circle btn-theme border btn-md" href="@Url.Action("Regstration_form", new { id = Model.ID_relieft })">
                                 Ủng Hộ Ngay
                             </a>

@@ -48,6 +48,8 @@
     <Compile Include="CategoryServices\ICategoryService.cs" />
     <Compile Include="DistrictServices\DistrictService.cs" />
     <Compile Include="DistrictServices\IDistrictService.cs" />
+    <Compile Include="IIdentityServices\IdentityService.cs" />
+    <Compile Include="IIdentityServices\IIdentityService.cs" />
     <Compile Include="ProductServices\IProductService.cs" />
     <Compile Include="ProductServices\ProductService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

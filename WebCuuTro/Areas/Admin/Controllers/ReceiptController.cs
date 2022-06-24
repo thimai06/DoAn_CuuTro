@@ -34,9 +34,8 @@ namespace WebCuuTro.Areas.Admin.Controllers
             var model = re.ListAll();
             return View(model.ToPagedList(page, pagesize));
         }
-
         [HttpPost]
-        public ActionResult Index(string searchString, int page = 1, int pagesize = 5)
+        public ActionResult Index(string searchString, int page = 1, int pagesize = 10)
         {
             var pr = new ReceiptDao();
             var model = pr.LisWheretAll(searchString, page, pagesize);
@@ -44,18 +43,68 @@ namespace WebCuuTro.Areas.Admin.Controllers
             return View(model);
         }
         [HttpGet]
-        public ActionResult Details(string id)
+        public ActionResult Create()
         {
-            if (id == null)
+            SyncUpData();
+            return View();
+        }
+
+        public void SyncUpData ()
+        {
+            var reDao = new ReliefDao();
+            var prDao = new ProductDAO();
+            var catDao = new ProductDAO();
+
+            ViewBag.ID_relieft = new SelectList(reDao.ListAll(), "ID_relieft", "Title");
+            ViewBag.Products = new SelectList(prDao.ListAll(), "ID_product", "Name_product");
+            ViewBag.Categories = new SelectList(catDao.ListAll(), "ID_cate", "Name_cate");
+        }
+
+        [HttpPost]
+        public ActionResult Create(ReceiptModel enti_re)
+        {
+            if (ModelState.IsValid)
+            {
+                var dao = new ReceiptDao();
+                if (dao.Find( enti_re.ID_receipt) != null)
+                {
+                    return RedirectToAction("Create", "User");
+                }
+                var receiptTemp = new Receipt();
+                receiptTemp.ID_relieft = enti_re.ID_relieft;
+                receiptTemp.Date = enti_re.Date;
+                receiptTemp.ID_user = enti_re.ID_user;
+                receiptTemp.Details_receipt = enti_re.Details_receipt;
+                receiptTemp.Nguoitang = enti_re.Nguoitang;
+                
+                dao.Insert(receiptTemp);
+
+                return RedirectToAction("Index", "Receipt");
+            }
+            SyncUpData();
+            //ViewBag.ID_relieft = new SelectList(db.Reliefs, "ID_relieft", "Title", enti_re.ID_relieft);                 
+            return View();
+
+        }
+
+        public ActionResult Details(int reliefId, string user)
+        {
+            if (reliefId == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Receipt pe = db.Receipts.Find(id);
-            if (pe == null)
+            var pr = new Details_ReceiptDao();
+            var model = pr.ListAll(reliefId, user);
+            if (model == null)
             {
                 return HttpNotFound();
             }
-            return View(pe);
+
+            return View(model);
         }
+
+     
+
+
     }
 }

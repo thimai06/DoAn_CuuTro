@@ -1,55 +1,41 @@
-﻿@model Models.EF.Receipt
+﻿@model IEnumerable<Models.EF.Details_receipt>  
 
 @{
     ViewBag.Title = "Details";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
+
 @section header{
     <div style="display:flex;">
         <i class="fa fa-user" style="font-size:30px; margin-top:20px;margin-left:10px"> </i>
-        <h3>&nbsp;Chi tiết</h3>
+        <h3>&nbsp;Chi tiết </h3>
     </div>
 }
 
-<div>
-   
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.ID_relieft)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ID_relieft)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ID_user)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ID_user)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Date)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Date)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Nguoitang)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Nguoitang)
-        </dd>
-
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID_receipt }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+    <div>
+        <div class="table-responsive">
+            <div>
+                <table class="table  table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th class="text-center text-primary yellow-bg-prd">STT</th>
+                            <th class="text-center text-primary yellow-bg-prd">Sản phẩm</th>
+                            <th class="text-center text-primary yellow-bg-prd">Số lượng</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{ int i = 1;}
+                        @foreach (var item in Model)
+                        {
+                            <tr id="row_@item.ID_receipt">
+                                <td class="tab-bg-dark-navy-blue" align="center">@i</td>
+                                <td>@item.Product.Name_product</td>
+                                <td>@item.Quantity</td>
+                            </tr>
+                            i = i + 1;
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>

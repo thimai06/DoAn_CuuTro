@@ -1,4 +1,6 @@
 ﻿using Common;
+using Common.ViewModel;
+
 using Models.EF;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -11,5 +13,6 @@ namespace Application.ReliefServices
         Task<List<Relief>> GetAllRelief(int pageInde, int pageSize);
         Task<List<Relief>> FindAllRelief();
         Task<Relief> DetailRelief(int id);
+        Task AddRelief(ReliefViewModel model);
     }
 }

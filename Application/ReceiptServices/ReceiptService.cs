@@ -54,5 +54,13 @@ namespace Application.ReceiptServices
             _repository.Add(receipt);
             await _repository.SaveChangesAsync();
         }
+
+        public async Task<List<Receipt>> ListReceipt(int id)
+        {
+            return await Task.Run(() =>
+            {
+                return _repository.AsQueryable<Receipt>(x => x.ID_relieft == id).OrderByDescending(x => x.Date).ToList();
+            });
+        }
     }
 }

@@ -6,16 +6,13 @@ using System.Web;
 
 namespace WebCuuTro.Areas.Admin.Models
 {
-    
-    
-        public class LoginModel
-        {
-            [Required]
-            public string Username { get; set; }
+    public class LoginModel
+    {
+        [Required]
+        public string Username { get; set; }
 
-            public string Passwords { get; set; }
+        public string Passwords { get; set; }
 
-            public string Personal_name { get; set; }
+        public string Personal_name { get; set; }
     }
-    
 }

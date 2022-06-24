@@ -33,6 +33,7 @@ namespace Models.BaseRepository
 
         Task<TEntity> FindAsnyc<TEntity>(Expression<Func<TEntity, bool>> where = null) where TEntity : class;
         Task<TEntity> FindAsnyc<TEntity, Tkey>(Tkey id) where TEntity : class, Tkey;
+        Task<bool> AnyAsync<TEntity>(Expression<Func<TEntity, bool>> where = null) where TEntity : class;
         Task SaveChangesAsync();
     }
 }

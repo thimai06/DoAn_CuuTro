@@ -17,9 +17,9 @@
 {
     <div class="col-lg-12 form-group" style="margin-top:20px">
         <div class="col-md-6">
-            <p>
+            @*<p>
                 @Html.ActionLink("Tạo Mới", "Create", "registration_form", new { @class = "btn btn-danger" })
-            </p>
+            </p>*@
         </div>
 
         <div class="col-md-3">
@@ -55,9 +55,9 @@
                     
 
                     <td align="center">
-                        <a href="~/Admin/SanPham/Details/@item.ID_re"><i class="fa fa-question-circle text-warning" style="font-size:20px;"></i></a>
-                        <a href="~/Admin/SanPham/Edit/@item.ID_re"><i class="fa fa-edit text-primary" style="font-size:20px;"></i></a>
-                        <a href="~/Admin/SanPham/Delete/@item.ID_re"><i class="fa fa-trash-o text-danger " style="font-size:20px;" onclick="return confirm('Bạn có chắc chắn muốn xóa đăng ký của @item.ID_user không ?');"></i></a>
+                        <a href="~/Admin/Registration_form/Details?reliefId=@item.ID_re&userId=@item.ID_user"><i class="fa fa-question-circle text-warning" style="font-size:20px;"></i></a>
+                        @*<a href="~/Admin/SanPham/Edit/@item.ID_re"><i class="fa fa-edit text-primary" style="font-size:20px;"></i></a>
+                        <a href="~/Admin/SanPham/Delete/@item.ID_re"><i class="fa fa-trash-o text-danger " style="font-size:20px;" onclick="return confirm('Bạn có chắc chắn muốn xóa đăng ký của @item.ID_user không ?');"></i></a>*@
                     </td>
                 </tr>
                     i = i + 1;

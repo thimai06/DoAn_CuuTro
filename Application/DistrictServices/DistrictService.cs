@@ -42,32 +42,24 @@ namespace Application.DistrictServices
                     {
                         foreach (var item in districtResponseData.results)
                         {
-                            var district = new District()
-                            {
-                                ID_district = item.code,
-                                Name_district = item.name,
-                            };
                             var urlGetCommune = urlGetCommuneBase + item.code;
                             var communeResponse = await httpClient.GetAsync(urlGetCommune);
                             var communeResponseContent = await communeResponse.Content.ReadAsStringAsync();
                             var communeResponseData = JsonConvert.DeserializeObject<BaseResponse<List<CommuneViewModel>>>(communeResponseContent);
                             if (communeResponseData.results != null && communeResponseData.results.Any())
                             {
-                                communeResponseData.results.ForEach(x =>
+                                foreach(var x in communeResponseData.results)
                                 {
-                                    district.Wards.Add(new Ward()
+                                    var ward = await _repository.FindAsnyc<Ward>(s => s.ID_ward == x.code);
+                                    if(ward != null)
                                     {
-                                        ID_ward = x.code,
-                                        ID_district = district.ID_district,
-                                        Name_ward = item.name,
-                                    });
-                                });
+                                        ward.Name_ward = x.name;
+                                        _repository.Update(ward);
+                                    }
+                                }
                             }
-                            districts.Add(district);
                         }
                     }
-
-                    _repository.AddRange(districts);
                     await _repository.SaveChangesAsync();
                 }
             }
@@ -75,6 +67,32 @@ namespace Application.DistrictServices
             {
                 return;
             }
+        }
+
+        public async Task<List<District>> AllDistrict()
+        {
+            return await _repository.FindAllAsnyc<District>();
+        }
+
+        public async Task<List<Ward>> AllWard(string id)
+        {
+            return await _repository.FindAllAsnyc<Ward>(x => x.ID_district == id);
+        }
+
+        public async Task<List<Relief_classification>> AllRC()
+        {
+            return await _repository.FindAllAsnyc<Relief_classification>();
+        }
+
+
+        public async Task<Ward> GetWard(string id)
+        {
+            return await _repository.FindAsnyc<Ward>(x => x.ID_ward == id);
+        }
+
+        public async Task<District> GetDistrict(string id)
+        {
+            return await _repository.FindAsnyc<District>();
         }
     }
 }

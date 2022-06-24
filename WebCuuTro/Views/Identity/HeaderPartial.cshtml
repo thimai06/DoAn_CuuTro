@@ -1,0 +1,21 @@
+﻿@model string
+
+<nav>
+    <ul class="header-menu">
+        <li class="header-menu-item"><a href="@Url.Action("Index","Home")" class="header-menu-link">Trang chủ</a></li>
+        <li class="header-menu-item"><a href="@Url.Action("ListRelief","Home")" class="header-menu-link">Công khai</a></li>
+        <li class="header-menu-item"><a href="@Url.Action("Reflect","Home")" class="header-menu-link">Đề xuất cứu trợ</a></li>
+        <li class="header-menu-item"><a href="#" class="header-menu-link">Bản đồ cứu trợ</a></li>
+        <li class="header-menu-item"><a href="#" class="header-menu-link">Phản ánh cứu trợ</a></li>
+        <li class="header-menu-item"><a href="#" class="header-menu-link">Liên hệ</a></li>
+        @if (ViewBag.userName != null)
+        {
+            <li class="header-menu-item"><a href="#" class="header-menu-link">TT Cá nhân</a></li>
+            <li class="header-menu-item"><a href="@Url.Action("Logout","Identity")" class="header-menu-link">Logout</a></li>
+        }
+        else
+        {
+            <li class="header-menu-item"><a href="@Url.Action("Login","Identity")" class="header-menu-link">Đăng nhập</a></li>
+        }
+    </ul>
+</nav>

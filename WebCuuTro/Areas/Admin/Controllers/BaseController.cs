@@ -9,24 +9,25 @@ using WebCuuTro.Areas.Admin.Models;
 
 namespace WebCuuTro.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Root")]
     public class BaseController : Controller
     {
         // GET: Admin/Base
-        protected override void OnActionExecuted(ActionExecutedContext filtercontext)
-        {
-            var session = (LoginModel)Session[Constants.USER_SESSION];
-            if (session == null)
-            {
-                filtercontext.Result = new RedirectToRouteResult(new RouteValueDictionary(new
-                {
-                    action = "Index",
-                    controller = "Login",
-                    area = "Admin"
-                }));
-            }
+        //protected override void OnActionExecuted(ActionExecutedContext filtercontext)
+        //{
+        //    var session = (LoginModel)Session[Constants.USER_SESSION];
+        //    if (session == null)
+        //    {
+        //        filtercontext.Result = new RedirectToRouteResult(new RouteValueDictionary(new
+        //        {
+        //            action = "Index",
+        //            controller = "Login",
+        //            area = "Admin"
+        //        }));
+        //    }
 
-            base.OnActionExecuted(filtercontext);
-        }
+        //    base.OnActionExecuted(filtercontext);
+        //}
         protected void SetAlert(string message, string type)
         {
             TempData["AlertMessage"] = message;

@@ -1,0 +1,146 @@
+﻿@using Models.EF;
+@using Common.Helper;
+@model List<Receipt>
+
+@{
+    var relief = ViewBag.relief as Relief;
+    ViewBag.Title = "Danh sách ủng hộ đợt cứu trợ " + relief.Title;
+    var index = 1;
+}
+
+
+<section class="relief-list" style="padding-top: 80px">
+    <div class="container">
+        <div class="public-detail-main">
+            <div class="public-detail-top">
+                <h1 class="public-detail-title">DANH SÁCH CÁC CÁ NHÂN, DOANH NGHIỆP, CƠ QUAN, ĐƠN VỊ ỦNG HỘ</h1>
+                <h4 class="public-detail-sub">@relief.Title</h4>
+                <p class="public-detail-timer">Từ ngày @relief.Start_date.ToDatetimeString() đến ngày @relief.End_date.ToDatetimeString()</p>
+                <div class="public-detail-box">
+                    <div class="public-detail-box-col">
+                        @if (Model != null && Model.Any())
+                        {
+                            <button>@Model.Count()</button>
+                            <span>Số lượt ủng hộ </span>
+                        }
+                        else
+                        {
+                            <button>0</button>
+                            <span>Số lượt ủng hộ </span>
+                        }
+                    </div>
+                <div class="public-detail-box-col">
+                    @if (Model != null && Model.Any())
+                    {
+                        <button>@Model.Sum(x => x.Details_receipt.Sum(s => s.Quantity))</button>
+                        <span>Số lượt Hàng hóa </span>
+                    }
+                    else
+                    {
+                        <button>0</button>
+                        <span>Số lượt Hàng hóa </span>
+                    }
+
+                </div>
+                </div>
+            </div>
+
+            <table class="public-detail-table">
+                <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Đơn vị tặng</th>
+                        <th>hàng cứu Trợ</th>
+                        <th>Số lượng</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null && Model.Any())
+                    {
+                        foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@index</td>
+                                <td>@item.Nguoitang</td>
+                                <td>@item.Date.ToDatetimeString()</td>
+                                <td>@item.Details_receipt.Sum(x => x.Quantity)</td>
+                            </tr>
+                        }
+
+                    }
+            else
+            {
+                <p class="alert alert-info" >Chưa có người ủng hộ cho đợt cứu trợ @relief.Title</p>
+            }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<style>
+    /* puclic details */
+    .public-detail {
+        margin-top: 20px;
+    }
+
+    .public-detail-top {
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    .public-detail-title {
+        font-weight: 500;
+    }
+
+    .public-detail-sub {
+        font-weight: 400;
+    }
+
+    .public-detail-box {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .public-detail-box-col {
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+    }
+
+        .public-detail-box-col:not(:first-child) {
+            margin-left: 20px;
+        }
+
+        .public-detail-box-col button {
+            color: white;
+            background-color: #5bc0de;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            border-radius: 5px;
+            padding: 10px;
+        }
+
+    .public-detail-table,
+    tr,
+    td,
+    th {
+        border: 1px solid #ddd;
+        border-collapse: collapse;
+        padding: 10px 10px;
+        text-align: center;
+    }
+
+        .public-detail-table thead {
+            color: white;
+            background-color: #5bc0de;
+        }
+
+    .public-detail-table {
+        width: 100%;
+        max-width: 100%;
+        margin-bottom: 20px;
+    }
+</style>

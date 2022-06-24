@@ -29,23 +29,12 @@
                 <div class="header-logo">
                     <img src="~/Assets/Client/image/lgo.png" alt="">
                 </div>
-                <nav>
-                    <ul class="header-menu">
-                        <li class="header-menu-item"><a href="@Url.Action("Index","Home")" class="header-menu-link">Trang chủ</a></li>
-                        <li class="header-menu-item"><a href="#" class="header-menu-link">Công khai</a></li>
-                        <li class="header-menu-item"><a href="#" class="header-menu-link">Đề xuất cứu trợ</a></li>
-                        <li class="header-menu-item"><a href="#" class="header-menu-link">Bản đồ cứu trợ</a></li>
-                        <li class="header-menu-item"><a href="#" class="header-menu-link">Phản ánh cứu trợ</a></li>
-                        <li class="header-menu-item"><a href="#" class="header-menu-link">Liên hệ</a></li>
-                        <li class="header-menu-item"><a href="#" class="header-menu-link">Đăng nhập</a></li>
-                    </ul>
-                </nav>
+                @Html.Action("HeaderPartial", "Identity")
             </div>
         </div>
     </header>
 
     @RenderBody()
-
 
     <div class="footer">
         <div class="container">

@@ -19,4 +19,11 @@ namespace Common
         public int TotalCount { get; set; }
         public int TotalPage => (int)Math.Ceiling(TotalCount / (double)PageSize);
     }
+
+    public class ServiceResult<T>
+    {
+        public T Data { get; set; }
+        public bool Successed { get; set; }
+        public string Message { get; set; }
+    }
 }

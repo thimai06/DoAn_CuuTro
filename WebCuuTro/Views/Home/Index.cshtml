@@ -1,4 +1,5 @@
 ﻿@using Models.EF;
+@using Common.Helper;
 @model List<Relief>
 @{
     ViewBag.Title = "Index";
@@ -121,20 +122,20 @@
                     <div class="menu-item">
                         <h4 class="menu-item-title">Công khai ủng hộ</h4>
                         <p class="menu-item-desc">Danh sách các cá nhân, doanh nghiệp, cơ quan, đơn vị ủng hộ.</p>
-                        <button class="btn-more">Xem thêm</button>
+                        <a href="@Url.Action("ListRelief")" class="btn-more">Xem thêm</a>
                     </div>
 
                     <div class="menu-item">
                         <h4 class="menu-item-title">PHẢN ÁNH THIÊN TAI</h4>
                         <p class="menu-item-desc">Phản ánh những địa điểm xảy ra thiên tai trong khu vực</p>
-                        <a href="details.html" class="btn-more">Xem thêm</a>
+                        <a href="@Url.Action("Reflect")" class="btn-more">Xem thêm</a>
                     </div>
 
                     <div class="menu-item">
                         <h4 class="menu-item-title">ĐỀ XUẤT ĐỊA CHỈ CẦN HỖ TRỢ</h4>
                         <p class="menu-item-desc">Đề xuất những địa chỉ cần cứu trợ</p>
                         <p><br></p>
-                        <a href="#" class="btn-more">Xem thêm</a>
+                        <a href="@Url.Action("Reflect")" class="btn-more">Xem thêm</a>
                     </div>
                 </div>
 
@@ -149,64 +150,35 @@
                     Đợt cứu trợ
                 </div>
                 <div class="relief-content" data-aos="zoom-in" data-aos-duration="2500">
-                    <a class="relief-item">
+                    @if (Model != null && Model.Any())
+                    {
+                        foreach (var item in Model)
+                        {
+                            <a class="relief-item" href="@Url.Action("DetailEvent", new { id = item.ID_relieft })">
+                                @if (item.Proofs != null && item.Proofs.Any())
+                                {
+                                    <div class="relief-item-img">
+                                        <img src="@item.Proofs.First().Link" alt="">
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="relief-item-img">
+                                        <img src="~/Assets/Client/image/ll.jpg" alt="">
+                                    </div>
+                                }
+                                <p class="relief-name">@item.Title</p>
+                                <div class="relief-item-more">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    <button>Xem thêm</button>
+                                </div>
+                            </a>
+                        }
+                    }
 
-                        <div class="relief-item-img">
-                            <img src="~/Assets/Client/image/ll.jpg" alt="">
-                        </div>
-                        <p class="relief-name">Lũ lụt tại vùng cao Tây Nguyên</p>
-                        <div class="relief-item-more">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            <button>Xem Thêm</button>
-                        </div>
-                    </a>
-                    <a class="relief-item">
-
-                        <div class="relief-item-img">
-                            <img src="~/Assets/Client/image/saclo.jpg" alt="">
-                        </div>
-                        <p class="relief-name">LŨ LỤT TẠI THÔN TRẠI Cá</p>
-                        <div class="relief-item-more">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            <button>xem them</button>
-                        </div>
-                    </a>
-                    <a class="relief-item">
-
-                        <div class="relief-item-img">
-                            <img src="~/Assets/Client/image/lulut.jpg" alt="">
-                        </div>
-                        <p class="relief-name">
-                            Sạc lỡ đất ở vùng Nam giang
-                        </p>
-                        <div class="relief-item-more">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            <button>xem them</button>
-                        </div>
-                    </a>
-                    <a class="relief-item">
-
-                        <div class="relief-item-img">
-                            <img src="~/Assets/Client/image/ll.jpg" alt="">
-                        </div>
-                        <p class="relief-name">Lũ lụt ở Nghệ An </p>
-                        <div class="relief-item-more">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            <button>xem them</button>
-                        </div>
-                    </a>
 
                 </div>
                 <div class="event-area container">
@@ -221,7 +193,7 @@
                                         {
                                             <div class="thumb col-lg-5" style="background-image: url(@item.Proofs.First().Link);">
                                                 <div class="date">
-                                                    @item.Start_date.Value.Day <strong>@item.Start_date.Value.Month</strong>
+                                                    @item.Start_date.Value.Day <strong>@item.Start_date.ToDatetimeString("MMM")</strong>
                                                 </div>
                                             </div>
                                         }
@@ -229,7 +201,7 @@
                                         {
                                             <div class="thumb col-lg-5" style="background-image: url(/Assets/Client/image/event/1.jpg);">
                                                 <div class="date">
-                                                    @item.Start_date.Value.Day <strong>@item.Start_date.Value.Month</strong>
+                                                    @item.Start_date.Value.Day <strong>@item.Start_date.ToDatetimeString("MMM")</strong>
                                                 </div>
                                             </div>
                                         }

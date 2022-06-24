@@ -1,0 +1,80 @@
+﻿@using Models.EF;
+@using Common.Helper;
+@model List<Relief>
+
+@{
+    ViewBag.Title = "Danh sách đợt cứu trợ";
+}
+
+
+<section class="relief-list" style="padding-top: 80px">
+    <div class="container">
+        <div class="relief-list-main">
+            @if (Model != null && Model.Any())
+            {
+                foreach (var item in Model)
+                {
+                    <div class="relief-item">
+                        <h2 class="relief-title">@item.Title</h2>
+                        <div class="relief-info">
+                            <div class="relief-info-desc">
+                                <p>Thời gian: @item.Start_date.ToDatetimeString()</p>
+                                <p>Địa chỉ: @item.map</p>
+                            </div>
+                            <a href="@Url.Action("ListReceipt", new { id = item.ID_relieft })">Xem ủng hộ</a>
+                        </div>
+                    </div>
+                }
+
+            }
+
+        </div>
+    </div>
+</section>
+
+<style>
+    /* danh sách cứu trợ */
+    .relief-list {
+        margin-top: 20px;
+    }
+
+    .relief-item {
+        width: 100%;
+        margin-bottom: 20px;
+        border: 1px solid #eee;
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+        border-radius: 10px;
+    }
+
+    .relief-title {
+        width: 100%;
+        text-align: center;
+        background-color: #ffcccc;
+        padding: 5px 0;
+        font-weight: 500;
+        color: white;
+    }
+
+    .relief-info {
+        height: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px 7px;
+    }
+
+    .relief-info-desc {
+        width: 60%;
+    }
+
+    .relief-info a {
+        border: none;
+        outline: none;
+        background-color: #5bc0de;
+        color: white;
+        font-size: 16px;
+        padding: 5px 7px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+</style>

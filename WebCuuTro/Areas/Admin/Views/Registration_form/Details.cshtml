@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Models.EF.Details_registration>
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section header{
+    <div style="display:flex;">
+        <i class="fa fa-user" style="font-size:30px; margin-top:20px;margin-left:10px"> </i>
+        <h3>&nbsp;Chi tiết</h3>
+    </div>
+}
+
+<div>
+    <div class="table-responsive">
+        <div>
+            <table class="table  table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th class="text-center text-primary yellow-bg-prd">STT</th>
+                        <th class="text-center text-primary yellow-bg-prd">Sản phẩm</th>
+                        <th class="text-center text-primary yellow-bg-prd">Số lượng</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{ int i = 1;}
+                    @foreach (var item in Model)
+                    {
+                        <tr id="row_@item.ID_re">
+                            <td class="tab-bg-dark-navy-blue" align="center">@i</td>
+                            <td>@item.Product.Name_product</td>
+                            <td>@item.Quantity</td>
+                        </tr>
+                        i = i + 1;
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

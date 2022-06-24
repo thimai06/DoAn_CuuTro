@@ -8,7 +8,7 @@
     <section class="form-group" style="padding-top: 80px">
         <div class="container">
             <div class="form-group-main">
-                <h2>Tạo phiếu nhập</h2>
+                <h2>Tạo phiếu ủng hộ</h2>
                 @if (ViewBag.Result == 1)
                 {
                     <p class="alert alert-success">
@@ -156,9 +156,7 @@
         });
 
         function selectDanhMuc(item) {
-            console.log(item)
             var danhMucId = item.value;
-            console.log(danhMucId)
             var id = item.id.split('_')[0];
             $.ajax({
                 type: 'get',

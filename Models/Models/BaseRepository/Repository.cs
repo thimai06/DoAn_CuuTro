@@ -100,6 +100,11 @@ namespace Models.BaseRepository
             return _dbContext.Set<TEntity>().FirstOrDefaultAsync(where);
         }
 
+        public Task<bool> AnyAsync<TEntity>(Expression<Func<TEntity, bool>> where = null) where TEntity : class
+        {
+            return _dbContext.Set<TEntity>().AnyAsync(where);
+        }
+
         public Task<TEntity> FindAsnyc<TEntity, Tkey>(Tkey id) where TEntity : class, Tkey
         {
             return _dbContext.Set<TEntity>().FindAsync(id);

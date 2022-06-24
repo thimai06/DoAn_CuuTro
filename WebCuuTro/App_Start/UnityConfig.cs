@@ -1,5 +1,6 @@
 using Application.CategoryServices;
 using Application.DistrictServices;
+using Application.IIdentityServices;
 using Application.ProductServices;
 using Application.ReceiptServices;
 using Application.ReliefServices;
@@ -23,6 +24,7 @@ namespace WebCuuTro
             container.RegisterType<ICategoryService, CategoryService>();
             container.RegisterType<IProductService, ProductService>();
             container.RegisterType<IReceiptService, ReceiptService>();
+            container.RegisterType<IIdentityService, IdentityService>();
 
 
             // e.g. container.RegisterType<ITestService, TestService>();

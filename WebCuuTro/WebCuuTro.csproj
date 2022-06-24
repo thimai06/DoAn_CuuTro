@@ -162,18 +162,21 @@
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\BaseController.cs" />
-    <Compile Include="Areas\Admin\Controllers\AdminController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CategorizeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\LoginController.cs" />
     <Compile Include="Areas\Admin\Controllers\PersonalController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ProductController.cs" />
     <Compile Include="Areas\Admin\Controllers\ReceiptController.cs" />
     <Compile Include="Areas\Admin\Controllers\Registration_formController.cs" />
     <Compile Include="Areas\Admin\Controllers\ReliefController.cs" />
+    <Compile Include="Areas\Admin\Controllers\Relief_classificationController.cs" />
     <Compile Include="Areas\Admin\Models\LoginModel.cs" />
+    <Compile Include="Areas\Admin\Models\ReceiptModel.cs" />
     <Compile Include="Areas\Admin\Models\Registration_formModel.cs" />
     <Compile Include="Areas\Admin\Models\ReliefModel.cs" />
-    <Compile Include="Areas\Client\ClientAreaRegistration.cs" />
-    <Compile Include="Areas\Client\Controllers\DashboardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\IdentityController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1167,7 +1170,6 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\Admin\Views\web.config" />
-    <Content Include="Areas\Admin\Views\Login\Index.cshtml" />
     <Content Include="Assets\Admin\bs3\css\bootstrap-theme.css.map" />
     <Content Include="Assets\Admin\bs3\css\bootstrap.css.map" />
     <Content Include="Assets\Admin\bs3\fonts\glyphicons-halflings-regular.eot" />
@@ -1328,14 +1330,7 @@
     <Content Include="Assets\Admin\Login\vendor\bootstrap\css\bootstrap-reboot.min.css.map" />
     <Content Include="Assets\Admin\Login\vendor\bootstrap\css\bootstrap.css.map" />
     <Content Include="Assets\Admin\Login\vendor\bootstrap\css\bootstrap.min.css.map" />
-    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
-    <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\_Header.cshtml" />
-    <Content Include="Areas\Admin\Views\Personal\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Personal\Create.cshtml" />
     <Content Include="libman.json" />
-    <Content Include="Areas\Admin\Views\Relief\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Registration_form\Index.cshtml" />
     <Content Include="Assets\Client\library\slick-master\slick-master\bower.json" />
     <Content Include="Assets\Client\library\slick-master\slick-master\component.json" />
     <Content Include="Assets\Client\library\slick-master\slick-master\CONTRIBUTING.markdown" />
@@ -1361,9 +1356,6 @@
     <Content Include="Assets\Client\library\slick\slick-theme.scss" />
     <Content Include="Assets\Client\library\slick\slick.less" />
     <Content Include="Assets\Client\library\slick\slick.scss" />
-    <Content Include="Areas\Client\Views\web.config" />
-    <Content Include="Areas\Client\Views\Dashboard\Index.cshtml" />
-    <Content Include="Areas\Client\Views\Shared\_Layout.cshtml" />
     <Content Include="Assets\Client\fonts\fa-brands-400-1.eot" />
     <Content Include="Assets\Client\fonts\fa-brands-400.eot" />
     <Content Include="Assets\Client\fonts\fa-brands-400.ttf" />
@@ -1387,17 +1379,30 @@
     <Content Include="Assets\Client\fonts\themify.eot" />
     <Content Include="Assets\Client\fonts\themify.ttf" />
     <Content Include="Assets\Client\fonts\themify.woff" />
-    <Content Include="Areas\Client\Views\Dashboard\ViewAll.cshtml" />
-    <Content Include="Areas\Client\Views\Dashboard\DetailEvent.cshtml" />
-    <Content Include="Areas\Client\Views\Dashboard\Donation.cshtml" />
-    <Content Include="Areas\Client\Views\Dashboard\Reflect.cshtml" />
-    <Content Include="Areas\Admin\Views\Relief\Details.cshtml" />
-    <Content Include="Areas\Admin\Views\Relief\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\Receipt\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Categorize\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Categorize\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Categorize\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Login\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Personal\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Personal\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Personal\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Personal\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Product\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Product\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Product\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Receipt\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Receipt\Details.cshtml" />
-    <Content Include="Areas\Client\Views\Dashboard\Regstration_form.cshtml" />
+    <Content Include="Areas\Admin\Views\Receipt\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Registration_form\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Registration_form\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Relief\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Relief\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Relief_classification\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Relief_classification\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Relief_classification\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_Header.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -1429,11 +1434,15 @@
     <Content Include="Views\Home\Regstration_form.cshtml" />
     <Content Include="Views\Home\ViewAll.cshtml" />
     <Content Include="Views\Home\OptionProduct.cshtml" />
+    <Content Include="Views\Home\ListRelief.cshtml" />
+    <Content Include="Views\Home\ListReceipt.cshtml" />
+    <Content Include="Views\Identity\Login.cshtml" />
+    <Content Include="Views\Identity\Register.cshtml" />
+    <Content Include="Views\Identity\HeaderPartial.cshtml" />
+    <Content Include="Views\Home\OptionWard.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Admin\Views\Base\" />
-    <Folder Include="Areas\Client\Models\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>

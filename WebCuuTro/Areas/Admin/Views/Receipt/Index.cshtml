@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<Models.EF.Receipt>
-
+@using PagedList;
+@using PagedList.Mvc
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
@@ -8,7 +9,7 @@
 @section header{
     <div style="display:flex;">
         <i class="fa fa-user" style="font-size:30px; margin-top:20px;margin-left:10px"> </i>
-        <h3>&nbsp;Quản lý người dùng</h3>
+        <h3>&nbsp;Quản lý phiếu nhập</h3>
     </div>
 }
 @using (Html.BeginForm("Index", "Receipt", FormMethod.Post))
@@ -28,40 +29,41 @@
         </div>
     </div>
 }
-    <div class="table-responsive">
-        <div>
-            <table class="table  table-bordered table-hover">
-                <thead>
-                    <tr>
-                        <th class="text-center text-primary yellow-bg-prd">STT</th>
-                        <th class="text-center text-primary yellow-bg-prd">Mã phiếu nhập</th>
-                        <th class="text-center text-primary yellow-bg-prd">Đợt cứu trợ</th>
-                        <th class="text-center text-primary yellow-bg-prd">Người tặng</th>
-                        <th class="text-center text-primary yellow-bg-prd">Ngày</th>
-                        
-                        <th class="text-center text-primary yellow-bg-prd">Thao Tác</th>
+<div class="table-responsive">
+    <div>
+        <table class="table  table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th class="text-center text-primary yellow-bg-prd">STT</th>
+                    <th class="text-center text-primary yellow-bg-prd">Mã phiếu nhập</th>
+                    <th class="text-center text-primary yellow-bg-prd">Đợt cứu trợ</th>
+                    <th class="text-center text-primary yellow-bg-prd">Người tặng</th>
+                    <th class="text-center text-primary yellow-bg-prd">Ngày</th>
+
+                    <th class="text-center text-primary yellow-bg-prd">Thao Tác</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{ int i = 1;}
+                @foreach (var item in Model)
+                {
+                    <tr id="row_@item.ID_receipt">
+                        <td class="tab-bg-dark-navy-blue" align="center">@i</td>
+                        <td align="center">@item.ID_receipt</td>
+                        <td align="center">@item.Relief.Title </td>
+                        <td align="center">@item.Nguoitang </td>
+                        <td align="center">@item.Date </td>
+
+                        <td align="center">
+                            <a href="~/Admin/Receipt/Details?reliefId=@item.ID_relieft&user=@item.Nguoitang"><i class="fa fa-question-circle text-warning" style="font-size:20px;"></i></a>
+                          </td>
                     </tr>
-                </thead>
-                <tbody>
-                    @{ int i = 1;}
-                    @foreach (var item in Model)
-                    {
-                        <tr id="row_@item.ID_receipt">
-                            <td class="tab-bg-dark-navy-blue" align="center">@i</td>
-                            <td align="center">@item.ID_receipt</td>                            
-                            <td align="center">@item.Relief.Title </td>
-                            <td align="center">@item.Pesonal.Personal_name </td>
-                            <td align="center">@item.Date </td>
-                            
-                            <td align="center">
-                                <a href="~/Admin/Receipt/Details/@item.ID_receipt"><i class="fa fa-question-circle text-warning" style="font-size:20px;"></i></a>
-                                <a href="~/Admin/Receipt/Edit/@item.ID_receipt"><i class="fa fa-edit text-primary" style="font-size:20px;"></i></a>
-                                <a href="~/Admin/Receipt/Delete/@item.ID_receipt"><i class="fa fa-trash-o text-danger " style="font-size:20px;" onclick="return confirm('Bạn có chắc chắn muốn xóa phiếu nhập của @item.Pesonal.Personal_name không ?');"></i></a>
-                            </td>
-                        </tr>
-                        i = i + 1;
-                    }
-                </tbody>
-            </table>
-        </div>
+                    i = i + 1;
+                }
+            </tbody>
+        </table>
     </div>
+</div>
+<div>
+    @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page, @searchString = @ViewBag.SearchString }))
+</div>
