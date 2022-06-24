@@ -44,11 +44,11 @@ namespace WebCuuTro.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
-            Pesonal pe = db.Pesonals.Find(userId);
-            Relief re = db.Reliefs.Find(reliefId);
+            //Pesonal pe = db.Pesonals.Find(userId);
+            //Relief re = db.Reliefs.Find(reliefId);
 
-            ViewBag.UserName = pe.Personal_name;
-            ViewBag.ReliefName = re.Title;
+            //ViewBag.UserName = pe.Personal_name;
+            //ViewBag.ReliefName = re.Title;
 
             return View(model);
         }

@@ -10,7 +10,92 @@
 
 <div class="form-group">
     <p> Nội dung trang quản trị</p>
-    @*<b><i class="fa fa-home text-danger">&nbsp;</i><span class="text-danger">TRANG QUẢN TRỊ</span></b>*@
+    <div class="row">
+        <div class="col-6">
+            <div class="card">
+                <div class="card-header text-center"><strong>Thống kê số đợt cứu trợ theo tháng trong năm 2022</strong></div>
+                <div class="card-body">
+                    <canvas class="my-4" id="bar" width="700"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div>Hello world </div>
+        </div>
+    </div>
 </div>
+
+@section Scripts{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.min.js"></script>
+    <script>
+
+        $.ajax({
+            type: "POST",
+            url: "/Home/LoadDataChart",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (chData) {
+                var aData = chData;
+                var aLabels = aData[0];
+                var aDatasets1 = aData[1];
+                var dataT = {
+                    labels: aLabels,
+                    datasets: [{
+                        label: '',
+                        data: aDatasets1,
+                        fill: false,
+                        backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)", "rgba(255, 159, 64, 0.2)", "rgba(255, 205, 86, 0.2)", "rgba(75, 192, 192, 0.2)", "rgba(153, 102, 255, 0.2)", "rgba(201, 203, 207, 0.2)"],
+                        borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(255, 159, 64)", "rgb(255, 205, 86)", "rgb(75, 192, 192)", "rgb(153, 102, 255)", "rgb(201, 203, 207)"],
+                        borderWidth: 1
+                    }]
+                };
+                var ctx = $("#bar").get(0).getContext("2d");
+                var myNewChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: dataT,
+                    options: {
+                        indexAxis: 'y',
+                        responsive: true,
+                        title: { display: false, text: 'ĐỢT CỨU TRỢ TRONG NĂM' },
+                        legend: { position: 'bottom' },
+                        scales: {
+                            xAxes: [{ gridLines: { display: false }, display: true, scaleLabel: { display: false, labelString: '' } }],
+                            yAxes: [{
+                                gridLines: { display: false }, display: true, scaleLabel: { display: false, labelString: '' }, ticks: {
+                                    min: 0,
+                                    max: 1,
+                                    stepSize: 1,
+                                    display: false
+                                }
+                            }]
+                        }
+                    }
+                });
+            }
+        })
+        //var chart = document.getElementById('bar').getContext('2d');
+        //var currentChar = new Chart(chart, {
+        //    type: 'bar',
+        //    data: {
+        //        labels: ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5'],
+        //        datasets: [{
+        //            label: 'Bar Chart',
+        //            data: [100, 200, 300, 200, 100],
+        //            backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)", "rgba(255, 159, 64, 0.2)", "rgba(255, 205, 86, 0.2)", "rgba(75, 192, 192, 0.2)", "rgba(153, 102, 255, 0.2)", "rgba(201, 203, 207, 0.2)"],
+        //            borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(255, 159, 64)", "rgb(255, 205, 86)", "rgb(75, 192, 192)", "rgb(153, 102, 255)", "rgb(201, 203, 207)"],
+        //        }]
+        //    },
+        //    options: {
+        //        scalse: {
+        //            yAxes: [{
+        //                ticks: {
+        //                    beginAtZero: true
+        //                }
+        //            }]
+        //        }
+        //    }
+        //})
+    </script>
+    }
 
 

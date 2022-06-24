@@ -80,6 +80,7 @@
     <Compile Include="EF\Receipt.cs" />
     <Compile Include="EF\Registration_form.cs" />
     <Compile Include="EF\Relief.cs" />
+    <Compile Include="EF\ReliefReport.cs" />
     <Compile Include="EF\Relief_classification.cs" />
     <Compile Include="EF\Role_Type.cs" />
     <Compile Include="EF\Ward.cs" />

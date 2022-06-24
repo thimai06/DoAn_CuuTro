@@ -41,13 +41,13 @@ namespace WebCuuTro.Areas.Admin.Controllers
             ViewBag.SearchString = searchString;
             return View(model);
         }
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int reliefId)
         {
-            if (id == null)
+            if (reliefId == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Relief re = db.Reliefs.Find(id);
+            Relief re = db.Reliefs.Find(reliefId);
             if (re == null)
             {
                 return HttpNotFound();
@@ -58,17 +58,15 @@ namespace WebCuuTro.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IDSP,TenSP,DonGia,SoLuong,MoTa,LoaiSP_ID")] Relief re)
+        public ActionResult Edit(Product enti_relief)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(re).State = EntityState.Modified;
+                db.Entry(enti_relief).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
-         
             }
-            //ViewBag.LoaiSP_ID = new SelectList(db.LoaiSPs, "IDLSP", "TenLoai", sanPham.LoaiSP_ID);
-            return View(re);
+            return View(enti_relief);
         }
         public ActionResult Details(int id)
         {

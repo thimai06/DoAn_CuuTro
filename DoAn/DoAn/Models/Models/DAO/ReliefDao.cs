@@ -57,6 +57,17 @@ namespace Models.DAO
             return db.Reliefs.Find(id);
         }
 
+        public List<ReliefReport> GetReportData()
+        {
+            var result = new List<ReliefReport>();
+            result = db.Reliefs.GroupBy(s => s.Time_sent_post.Month).Select(gr => new ReliefReport
+            {
+                month = gr.Key,
+                count = gr.Count()
+            }).ToList();
+            return result;
+        }
+
 
     }
 }

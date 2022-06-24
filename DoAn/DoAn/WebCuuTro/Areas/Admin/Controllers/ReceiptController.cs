@@ -34,7 +34,6 @@ namespace WebCuuTro.Areas.Admin.Controllers
             var model = re.ListAll();
             return View(model.ToPagedList(page, pagesize));
         }
-
         [HttpPost]
         public ActionResult Index(string searchString, int page = 1, int pagesize = 10)
         {
@@ -72,42 +71,40 @@ namespace WebCuuTro.Areas.Admin.Controllers
                     return RedirectToAction("Create", "User");
                 }
                 var receiptTemp = new Receipt();
-                //receiptTemp.ID_relieft = enti_re.
-                //dao.Insert(enti_re);
-                //if (!String.IsNullOrEmpty(result))
-                //{
-                return RedirectToAction("Index", "Receipt");
+                receiptTemp.ID_relieft = enti_re.ID_relieft;
+                receiptTemp.Date = enti_re.Date;
+                receiptTemp.ID_user = enti_re.ID_user;
+                receiptTemp.Details_receipt = enti_re.Details_receipt;
+                receiptTemp.Nguoitang = enti_re.Nguoitang;
+                
+                dao.Insert(receiptTemp);
 
-                //}
-                //else
-                //{
-                //    ModelState.AddModelError("", "Tạo không thành công");
-                //}
+                return RedirectToAction("Index", "Receipt");
             }
             SyncUpData();
-            //ViewBag.ID_relieft = new SelectList(db.Reliefs, "ID_relieft", "Title", enti_re.ID_relieft);
-       
-           
+            //ViewBag.ID_relieft = new SelectList(db.Reliefs, "ID_relieft", "Title", enti_re.ID_relieft);                 
             return View();
 
         }
 
-
-
-
-        [HttpGet]
-        public ActionResult Details(string id)
+        public ActionResult Details(int reliefId, string user)
         {
-            if (id == null)
+            if (reliefId == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Receipt pe = db.Receipts.Find(id);
-            if (pe == null)
+            var pr = new Details_ReceiptDao();
+            var model = pr.ListAll(reliefId, user);
+            if (model == null)
             {
                 return HttpNotFound();
             }
-            return View(pe);
+
+            return View(model);
         }
+
+     
+
+
     }
 }

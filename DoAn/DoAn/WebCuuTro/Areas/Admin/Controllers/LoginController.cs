@@ -26,6 +26,10 @@ namespace WebCuuTro.Areas.Admin.Controllers
                 if (result == 0)
                 {
                     //ModelState.AddModelError("", "Đăng nhập thành công");
+                    
+                    var currentUser = user.Find(login.Username);
+                    login.Personal_name = currentUser.Personal_name;
+
                     Session.Add(Constants.USER_SESSION, login);
                     return RedirectToAction("Index","Home");
                 }

@@ -16,10 +16,11 @@ namespace Models.DAO
         {
             db = new DB_Relief();
         }
-        //public List<Details_Receipt> ListAll(int reliefId, string userId)nghe 
-        //{
-        //    //return db.Registration_forms.ToList();
-        //    return db.Details_registration.Where(x => x.ID_re == reliefId && x.Registration_form.ID_user == userId).ToList();
-        //}
+        public List<Details_receipt> ListAll(int reliefId, string userId)
+        {
+            //return db.Registration_forms.ToList();
+            return db.Details_receipt.Where(x => x.ID_receipt == reliefId && x.Receipt.Nguoitang == userId).ToList();
+        }
     }
 }
+

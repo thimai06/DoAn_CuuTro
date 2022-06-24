@@ -46,7 +46,7 @@
                         <ul class="sidebar-menu" id="nav-accordion">
                             <li class="sub-menu">
                                 <a href="javascript:;">
-                                    <i class="fa fa-laptop"></i>
+                                    <i class="fa fa-user"></i>
                                     <span>Quản lý tài khoản</span>
                                 </a>
                                 <ul class="sub">
@@ -56,66 +56,66 @@
                             </li>
                             <li class="sub-menu">
                                 <a href="javascript:;">
-                                    <i class="fa fa-magic"></i>
+                                    <i class="fa fa-adjust"></i>
                                     <span>Quản lý Đợt cứu trợ</span>
                                 </a>
-                                <ul class="sub">                                   
+                                <ul class="sub">
                                     <li>@Html.ActionLink("Danh Sách các đợt cứu trợ", "Index", "Relief")</li>
                                 </ul>
                             </li>
                             <li class="sub-menu">
                                 <a href="javascript:;">
-                                    <i class="fa fa-magic"></i>
+                                    <i class="fa fa-ambulance"></i>
                                     <span>Quản lý Đăng ký ủng hộ</span>
                                 </a>
-                                <ul class="sub">                                    
+                                <ul class="sub">
                                     <li>@Html.ActionLink("Danh Sách Đăng ký ủng hộ", "Index", "Registration_form")</li>
                                 </ul>
                             </li>
 
                             <li class="sub-menu">
                                 <a href="javascript:;">
-                                    <i class="fa fa-magic"></i>
+                                    <i class="fa fa-android"></i>
                                     <span>Quản lý Phiếu nhập</span>
                                 </a>
                                 <ul class="sub">
-                                    <li>@Html.ActionLink("Tạo Phiếu nhập", "Create", "Receipt")</li>                                   
+                                    <li>@Html.ActionLink("Tạo Phiếu nhập", "Create", "Receipt")</li>
                                     <li>@Html.ActionLink("Danh Sách Phiếu nhập", "Index", "Receipt")</li>
                                 </ul>
                             </li>
 
                             <li class="sub-menu">
                                 <a href="javascript:;">
-                                    <i class="fa fa-magic"></i>
+                                    <i class="fa fa-archive"></i>
                                     <span>Quản lý loại cứu trợ</span>
                                 </a>
                                 <ul class="sub">
-                                    <li>@Html.ActionLink("Thêm loại cứu trợ", "Create", "Relief_classification")</li>                                    
+                                    <li>@Html.ActionLink("Thêm loại cứu trợ", "Create", "Relief_classification")</li>
                                     <li>@Html.ActionLink("Danh Sách các loại cứu trợ", "Index", "Relief_classification")</li>
                                 </ul>
                             </li>
 
                             <li class="sub-menu">
                                 <a href="javascript:;">
-                                    <i class="fa fa-magic"></i>
+                                    <i class="fa fa-asterisk"></i>
                                     <span>Quản lý danh mục</span>
                                 </a>
                                 <ul class="sub">
                                     <li>@Html.ActionLink("Thêm danh mục", "Create", "Categorize")</li>
-                           
+
                                     <li>@Html.ActionLink("Danh Sách danh mục", "Index", "Categorize")</li>
                                 </ul>
                             </li>
 
                             <li class="sub-menu">
                                 <a href="javascript:;">
-                                    <i class="fa fa-magic"></i>
+                                    <i class="fa fa-book"></i>
                                     <span>Quản lý hàng</span>
                                 </a>
                                 <ul class="sub">
-                                    <li>@Html.ActionLink("Thêm hàng cứu trợ", "Create", "LoaiSP")</li>
+                                    <li>@Html.ActionLink("Thêm hàng cứu trợ", "Create", "Product")</li>
                                     @*<li>@Html.ActionLink("Quản Lý Loại", "Index", "LoaiSP")</li>*@
-                                    <li>@Html.ActionLink("Danh Sách các hàng cứu trợ", "Index", "LoaiSP")</li>
+                                    <li>@Html.ActionLink("Danh Sách các hàng cứu trợ", "Index", "Product")</li>
                                 </ul>
                             </li>
 
@@ -125,17 +125,15 @@
                                     <span>Thống Kê</span>
                                 </a>
                                 <ul class="sub">
+
                                     <li>@Html.ActionLink("Theo số lượng thực tế/ đăng ký", "Index", "SanPhamBanChay")</li>
 
                                 </ul>
                             </li>
 
-                            <li>
-                                <a href="login.html">
-                                    <i class="fa fa-user"></i>
-                                    <span>Login</span>
-                                </a>
-                            </li>
+
+                            <li><a href="@Url.Action("Logout","Home")"><i class="fa fa-sign-out"></i> Log Out</a></li>
+
                         </ul>
                 </b>
             </div>

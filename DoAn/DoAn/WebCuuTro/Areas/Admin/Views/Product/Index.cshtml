@@ -1,23 +1,23 @@
-﻿@model IEnumerable<Models.EF.Receipt>
+﻿@model IEnumerable<Models.EF.Product>
 @using PagedList;
 @using PagedList.Mvc
+
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
-
 @section header{
     <div style="display:flex;">
         <i class="fa fa-user" style="font-size:30px; margin-top:20px;margin-left:10px"> </i>
-        <h3>&nbsp;Quản lý phiếu nhập</h3>
+        <h3>&nbsp;Quản lý Hàng cứu trợ</h3>
     </div>
 }
-@using (Html.BeginForm("Index", "Receipt", FormMethod.Post))
+@using (Html.BeginForm("Index", "Product", FormMethod.Post))
 {
     <div class="col-lg-12 form-group" style="margin-top:20px">
         <div class="col-md-6">
             <p>
-                @Html.ActionLink("Tạo Mới", "Create", "Receipt", new { @class = "btn btn-danger" })
+                @Html.ActionLink("Tạo Mới", "Create", "Product", new { @class = "btn btn-danger" })
             </p>
         </div>
 
@@ -29,17 +29,17 @@
         </div>
     </div>
 }
+
+    ---
 <div class="table-responsive">
     <div>
         <table class="table  table-bordered table-hover">
             <thead>
                 <tr>
                     <th class="text-center text-primary yellow-bg-prd">STT</th>
-                    <th class="text-center text-primary yellow-bg-prd">Mã phiếu nhập</th>
-                    <th class="text-center text-primary yellow-bg-prd">Đợt cứu trợ</th>
-                    <th class="text-center text-primary yellow-bg-prd">Người tặng</th>
-                    <th class="text-center text-primary yellow-bg-prd">Ngày</th>
-
+                    <th class="text-center text-primary yellow-bg-prd">Mã danh mục</th>
+                    <th class="text-center text-primary yellow-bg-prd">Mã Sản phẩm</th>
+                    <th class="text-center text-primary yellow-bg-prd">Tên Sản phẩm</th>
                     <th class="text-center text-primary yellow-bg-prd">Thao Tác</th>
                 </tr>
             </thead>
@@ -47,16 +47,15 @@
                 @{ int i = 1;}
                 @foreach (var item in Model)
                 {
-                    <tr id="row_@item.ID_receipt">
+                    <tr id="row_@item.ID_product">
                         <td class="tab-bg-dark-navy-blue" align="center">@i</td>
-                        <td align="center">@item.ID_receipt</td>
-                        <td align="center">@item.Relief.Title </td>
-                        <td align="center">@item.Nguoitang </td>
-                        <td align="center">@item.Date </td>
-
+                        <td align="center">@item.ID_cate</td>
+                        <td align="center">@item.ID_product </td>
+                        <td align="center">@item.Name_product </td>
                         <td align="center">
-                            <a href="~/Admin/Receipt/Details?reliefId=@item.ID_relieft&user=@item.Nguoitang"><i class="fa fa-question-circle text-warning" style="font-size:20px;"></i></a>
-                          </td>
+                            <a href="~/Admin/Product/Edit?id=@item.ID_product"><i class="fa fa-edit text-primary" style="font-size:20px;"></i></a>
+
+                        </td>
                     </tr>
                     i = i + 1;
                 }

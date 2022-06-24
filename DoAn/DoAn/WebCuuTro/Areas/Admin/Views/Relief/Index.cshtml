@@ -18,9 +18,9 @@
 {
     <div class="col-lg-12 form-group" style="margin-top:20px">
         <div class="col-md-6">
-            <p>
+            @*<p>
                 @Html.ActionLink("Tạo Mới", "Create", "relief", new { @class = "btn btn-danger" })
-            </p>
+            </p>*@
         </div>
 
         <div class="col-md-3">
@@ -39,7 +39,7 @@
                     <tr>
                         <th class="text-center text-primary yellow-bg-prd">STT</th>
                         <th class="text-center text-primary yellow-bg-prd">Tiêu đề</th>
-                        <th class="text-center text-primary yellow-bg-prd">Mô tả</th>
+                        @*<th class="text-center text-primary yellow-bg-prd">Mô tả</th>*@
                         <th class="text-center text-primary yellow-bg-prd">Nội dung</th>
                         <th class="text-center text-primary yellow-bg-prd">Địa chỉ</th>
                         <th class="text-center text-primary yellow-bg-prd">Loại cứu trợ</th>
@@ -55,7 +55,7 @@
                         <tr id="row_@item.ID_relieft">
                             <td class="tab-bg-dark-navy-blue" align="center">@i</td>
                             <td align="center">@item.Title</td>
-                            <td>@item.Description</td>
+                            @*<td>@item.Description</td>*@
                             <td align="center">@item.Content </td>
                             <td align="center">@item.Ward.Name_ward </td>
                             <td align="center">@item.Relief_classification.Description </td>
@@ -63,11 +63,9 @@
                             @if(item.status == "1"){ <td align="center">Chưa duyệt</td> }
                             else { <td align="center">Đã duyệt</td>}
 
-                            <td align="center">
-                                <a href="~/Admin/Relief/Details/@item.ID_relieft"><i class="fa fa-question-circle text-warning" style="font-size:20px;"></i></a>
-                                <a href="~/Admin/Relief/Edit/@item.ID_relieft"><i class="fa fa-edit text-primary" style="font-size:20px;"></i></a>
-                                <a href="~/Admin/Relief/Delete/@item.ID_relieft"><i class="fa fa-trash-o text-danger " style="font-size:20px;" onclick="return confirm('Bạn có chắc chắn muốn xóa @item.Title không ?');"></i></a>
-                            </td>
+                         <td align="center">
+                                    <a href="~/Admin/Relief/Edit?reliefId=@item.ID_relieft"><i class="fa fa-edit text-primary" style="font-size:20px;"></i></a>
+                        </td>
                         </tr>
                         i = i + 1;
                     }

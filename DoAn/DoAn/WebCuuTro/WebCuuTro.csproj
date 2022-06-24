@@ -1366,12 +1366,9 @@
     <Content Include="Areas\Client\Views\Dashboard\ViewAll.cshtml" />
     <Content Include="Areas\Client\Views\Dashboard\DetailEvent.cshtml" />
     <Content Include="Areas\Client\Views\Dashboard\Reflect.cshtml" />
-    <Content Include="Areas\Admin\Views\Relief\Details.cshtml" />
-    <Content Include="Areas\Admin\Views\Relief\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Receipt\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Personal\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Personal\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\Receipt\Details.cshtml" />
     <Content Include="Areas\Client\Views\Dashboard\Regstration_form.cshtml" />
     <Content Include="Areas\Admin\Views\Registration_form\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Categorize\Index.cshtml" />
@@ -1381,6 +1378,11 @@
     <Content Include="Areas\Admin\Views\Relief_classification\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Relief_classification\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Relief_classification\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Receipt\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Product\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Product\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Product\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Relief\Edit.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -1412,7 +1414,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Views\Base\" />
-    <Folder Include="Areas\Admin\Views\Product\" />
     <Folder Include="Areas\Client\Models\" />
     <Folder Include="Controllers\" />
     <Folder Include="Models\" />

@@ -28,7 +28,7 @@ namespace Models.EF
         [StringLength(10)]
         public string ID_ward { get; set; }
 
-        public DateTime? Time_sent_post { get; set; }
+        public DateTime Time_sent_post { get; set; }
 
         public string Content { get; set; }
 

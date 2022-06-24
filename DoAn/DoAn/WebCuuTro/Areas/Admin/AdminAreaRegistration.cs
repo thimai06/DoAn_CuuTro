@@ -41,7 +41,11 @@ namespace WebCuuTro.Areas.Admin
                 url: "Admin/{controller}/{action}",
                 defaults: new { controller = "Categorize", action = "Edit", id = UrlParameter.Optional }
             );
-            
+            context.MapRoute(
+                name: "ChinhSuaCuuTro",
+                url: "Admin/{controller}/{action}",
+                defaults: new { controller = "Relief", action = "Edit", id = UrlParameter.Optional }
+            );
         }
     }
 }
